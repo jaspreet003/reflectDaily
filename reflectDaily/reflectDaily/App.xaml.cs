@@ -1,4 +1,5 @@
 ﻿using reflectDaily.AccountManagement;
+using reflectDaily.Main;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,7 +12,7 @@ namespace reflectDaily
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new RegisterPage());
+            MainPage = new NavigationPage(new HomePage());
         }
 
         protected override void OnStart()
