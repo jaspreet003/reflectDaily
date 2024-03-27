@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="reflectDaily.AccountManagement.LoginPage"
+             BackgroundImageSource="loginBackground.jpg">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="Black" Opacity="0.8" VerticalOptions="FillAndExpand">
+                <StackLayout Margin="30" VerticalOptions="EndAndExpand">
+                    <Label Text="EMAIL" TextColor="White" FontAttributes="Bold" FontSize="Medium"></Label>
+                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="20">
+                        <Entry x:Name="email" TextColor="Black"></Entry>
+                    </Frame>
+                    
+                    <Label Text="PASSWORD" TextColor="White" FontAttributes="Bold" FontSize="Medium"></Label>
+                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="20">
+                        <Entry x:Name="password" TextColor="Black"></Entry>
+                    </Frame>
+
+                    <Button Text="LOGIN" TextColor="White" FontAttributes="Bold" FontSize="Medium" BackgroundColor="SandyBrown" Opacity="0.9" CornerRadius="15" Padding="17"></Button>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                        <Label Text="Don't have an account?" TextColor="White" ></Label>
+                        <Label Text="REGISTER" TextColor="White" FontAttributes="Italic"></Label>
+                    </StackLayout>
+                    
+                </StackLayout>
+                
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
