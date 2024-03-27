@@ -5,24 +5,41 @@
              BackgroundImageSource="loginBackground.jpg">
     <ContentPage.Content>
         <StackLayout>
-            <Frame BackgroundColor="Black" Opacity="0.8" VerticalOptions="FillAndExpand">
-                <StackLayout Margin="30" VerticalOptions="EndAndExpand">
-                    <Label Text="EMAIL" TextColor="White" FontAttributes="Bold" FontSize="Medium"></Label>
-                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="20">
-                        <Entry x:Name="email" TextColor="Black"></Entry>
-                    </Frame>
+            <Frame BackgroundColor="Black" Opacity="0.85" VerticalOptions="FillAndExpand">
+
+                
+                
+                <StackLayout Margin="30" VerticalOptions="CenterAndExpand">
+
+                    <Image Source="logo.png" WidthRequest="500" HeightRequest="200"></Image>
                     
-                    <Label Text="PASSWORD" TextColor="White" FontAttributes="Bold" FontSize="Medium"></Label>
-                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="20">
-                        <Entry x:Name="password" TextColor="Black"></Entry>
+                    <Label Text="EMAIL" TextColor="White" FontAttributes="Bold" FontSize="Medium"></Label>
+                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="40">
+                        <Entry x:Name="email" TextColor="Black" Keyboard="Email"></Entry>
                     </Frame>
 
-                    <Button Text="LOGIN" TextColor="White" FontAttributes="Bold" FontSize="Medium" BackgroundColor="SandyBrown" Opacity="0.9" CornerRadius="15" Padding="17"></Button>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                        <Label Text="Don't have an account?" TextColor="White" ></Label>
-                        <Label Text="REGISTER" TextColor="White" FontAttributes="Italic"></Label>
-                    </StackLayout>
+                    <BoxView HeightRequest="20" />
                     
+                    <Label Text="PASSWORD" TextColor="White" FontAttributes="Bold" FontSize="Medium"></Label>
+                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="40">
+                        <Entry x:Name="password" TextColor="Black" IsPassword="True" ></Entry>
+                    </Frame>
+
+                    <BoxView HeightRequest="40" />
+                    
+                    <Button Text="LOGIN" TextColor="White" FontAttributes="Bold" FontSize="20" BackgroundColor="#402719" CornerRadius="15" HeightRequest="80" ></Button>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                        <Label Text="Don't have an account?" TextColor="White"></Label>
+                        <Label Text="REGISTER" TextColor="White" FontAttributes="Italic">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                       NumberOfTapsRequired="1"
+                                       Command="{Binding RegisterCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+
                 </StackLayout>
                 
             </Frame>
