@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="reflectDaily.AccountManagement.LoginPage"
+             NavigationPage.HasNavigationBar="False"
              BackgroundImageSource="loginBackground.jpg">
+    
     <ContentPage.Content>
         <StackLayout>
             <Frame BackgroundColor="Black" Opacity="0.85" VerticalOptions="FillAndExpand">
@@ -14,24 +16,24 @@
                     <Image Source="logo.png" WidthRequest="500" HeightRequest="200"></Image>
                     
                     <Label Text="EMAIL" TextColor="White" FontAttributes="Bold" FontSize="Medium"></Label>
-                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="40">
-                        <Entry x:Name="email" TextColor="Black" Keyboard="Email"></Entry>
+                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="40" Padding="10">
+                        <Entry x:Name="email" TextColor="Black" Keyboard="Email" HeightRequest="30" FontSize="15" Margin="0"></Entry>
                     </Frame>
 
                     <BoxView HeightRequest="20" />
                     
                     <Label Text="PASSWORD" TextColor="White" FontAttributes="Bold" FontSize="Medium"></Label>
-                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="40">
-                        <Entry x:Name="password" TextColor="Black" IsPassword="True" ></Entry>
+                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="40" Padding="10">
+                        <Entry x:Name="password" TextColor="Black" IsPassword="True" HeightRequest="30" FontSize="15" Margin="0"></Entry>
                     </Frame>
 
                     <BoxView HeightRequest="40" />
                     
-                    <Button Text="LOGIN" TextColor="White" FontAttributes="Bold" FontSize="20" BackgroundColor="SaddleBrown" CornerRadius="15" HeightRequest="80" ></Button>
+                    <Button Text="LOGIN" TextColor="White" FontAttributes="Bold" FontSize="20" BackgroundColor="SaddleBrown" CornerRadius="15" HeightRequest="60" ></Button>
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                         <Label Text="Don't have an account?" TextColor="White"></Label>
-                        <Label Text="REGISTER" TextColor="White" FontAttributes="Italic">
+                        <Label x:Name="registerLabel" Text="REGISTER" TextColor="White" FontAttributes="Italic">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer 
                                        NumberOfTapsRequired="1"

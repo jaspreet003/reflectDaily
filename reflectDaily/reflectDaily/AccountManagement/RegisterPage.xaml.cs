@@ -20,6 +20,8 @@ namespace reflectDaily.AccountManagement
         private void RegisterButton_Clicked(object sender, EventArgs e)
         {
 
+			Navigation.PushAsync(new LoginPage());
+
         }
     }
 }

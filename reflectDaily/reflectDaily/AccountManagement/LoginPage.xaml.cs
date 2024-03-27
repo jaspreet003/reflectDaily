@@ -15,6 +15,12 @@ namespace reflectDaily.AccountManagement
         public LoginPage()
         {
             InitializeComponent();
+
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += (s, e) => {
+                Navigation.PushAsync(new RegisterPage());
+            };
+            registerLabel.GestureRecognizers.Add(tapGestureRecognizer);
         }
     }
 }

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reflectDaily.Android", "ref
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reflectDaily.iOS", "reflectDaily\reflectDaily.iOS\reflectDaily.iOS.csproj", "{BCB9F720-19C1-4D3C-8923-48EC4E657072}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reflectDaily", "reflectDaily\reflectDaily\reflectDaily.csproj", "{123264FE-9890-4E8B-9CFD-DCA08953C0C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "reflectDaily", "reflectDaily\reflectDaily\reflectDaily.csproj", "{123264FE-9890-4E8B-9CFD-DCA08953C0C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

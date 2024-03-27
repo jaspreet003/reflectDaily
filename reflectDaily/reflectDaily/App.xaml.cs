@@ -11,7 +11,7 @@ namespace reflectDaily
         {
             InitializeComponent();
 
-            MainPage = new RegisterPage();
+            MainPage = new NavigationPage(new RegisterPage());
         }
 
         protected override void OnStart()
