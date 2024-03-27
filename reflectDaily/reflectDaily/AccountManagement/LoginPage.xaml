@@ -27,7 +27,7 @@
 
                     <BoxView HeightRequest="40" />
                     
-                    <Button Text="LOGIN" TextColor="White" FontAttributes="Bold" FontSize="20" BackgroundColor="#402719" CornerRadius="15" HeightRequest="80" ></Button>
+                    <Button Text="LOGIN" TextColor="White" FontAttributes="Bold" FontSize="20" BackgroundColor="SaddleBrown" CornerRadius="15" HeightRequest="80" ></Button>
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                         <Label Text="Don't have an account?" TextColor="White"></Label>
