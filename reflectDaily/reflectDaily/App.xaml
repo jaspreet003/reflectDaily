@@ -7,6 +7,17 @@
 
         <ResourceDictionary>
 
+            <Color x:Key="primary">#B2DFDC</Color>
+            <Color x:Key="secondary">#7EB4B0</Color>
+            <Color x:Key="accent">#FFDD67</Color>
+            <Color x:Key="neutral">#060300</Color>
+            <Color x:Key="base">#fff5ff</Color>
+            <Color x:Key="info">#E0E0E0</Color>
+            <Color x:Key="success">#62B8B3</Color>
+            <Color x:Key="warning">#BEE9E6</Color>
+            <Color x:Key="error">#C33737</Color>
+
+
         </ResourceDictionary>
 
     </Application.Resources>
