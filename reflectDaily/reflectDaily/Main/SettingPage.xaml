@@ -1,12 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="reflectDaily.Main.SettingPage">
+             x:Class="reflectDaily.Main.SettingPage"
+             xmlns:tool="http://xamarin.com/schemas/2020/toolkit">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout VerticalOptions="FillAndExpand">
+            <Frame>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Hello" FontSize="20"></Label>
+                    <Label Text="Jaspreet" FontSize="20"></Label>
+                </StackLayout>
+            </Frame>
+
+
+            <StackLayout Margin="30"  VerticalOptions="FillAndExpand">
+                <Label Text="USERNAME" TextColor="Black" FontSize="15"></Label>
+                <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="25" HeightRequest="40" Padding="10" WidthRequest="100">
+                    <Entry x:Name="username" TextColor="Black" Keyboard="Email" HeightRequest="30" FontSize="15" Margin="0" WidthRequest="50"></Entry>
+                </Frame>
+
+                <BoxView HeightRequest="20"></BoxView>
+                
+                <Label Text="EMAIL" TextColor="Black" FontSize="15"></Label>
+                <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="25" HeightRequest="40" Padding="10" WidthRequest="100">
+                    <Entry x:Name="email" TextColor="Black" Keyboard="Email" HeightRequest="30" FontSize="15" Margin="0" WidthRequest="50"></Entry>
+                </Frame>
+                
+                <BoxView HeightRequest="20"></BoxView>
+
+                <Label Text="PASSWORD" TextColor="Black" FontSize="15"></Label>
+                <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="25" HeightRequest="40" Padding="10" WidthRequest="100">
+                    <Entry x:Name="password" TextColor="Black" Keyboard="Email" HeightRequest="30" FontSize="15" Margin="0" WidthRequest="50"></Entry>
+                </Frame>
+                
+                <BoxView HeightRequest="20"></BoxView>
+
+                <Label Text="THEME"  TextColor="Black" FontSize="15"></Label>
+
+                <CollectionView x:Name="colourList" Margin="10" HorizontalOptions="FillAndExpand">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="5"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView Padding="5">
+                                <Frame WidthRequest="40"
+                                   HeightRequest="40"
+                                   CornerRadius="40"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   Padding="0"
+                                   BackgroundColor="{Binding colourValue}">
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ThemeColourTapGestureRecognizer_Tapped"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </ContentView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+            
+            
+
+            <Button Text="UPDATE" VerticalOptions="End" ></Button>
+            
+
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
