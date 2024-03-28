@@ -37,5 +37,10 @@ namespace reflectDaily.Main
             
 
         }
+
+        private void RandomThemeTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+
+        }
     }
 }
