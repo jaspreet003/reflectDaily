@@ -17,11 +17,18 @@
 
                                     <ScrollView Grid.Column="0" VerticalOptions="FillAndExpand" Orientation="Vertical" HeightRequest="200" HorizontalOptions="FillAndExpand"
                                             VerticalScrollBarVisibility="Always">
-                                        <StackLayout Spacing="20">
-                                            <!-- Dynamically add options here -->
-                                            <Button Text="Reading" BackgroundColor="{StaticResource base}" CornerRadius="10"/>
-                                           
-                                        </StackLayout>
+                                        
+                                            <ListView x:Name="optionListView">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <ViewCell>
+                                                        <StackLayout Spacing="20">
+                                                            <Button Text="Reading" BackgroundColor="{StaticResource base}" CornerRadius="10"/>
+                                                        </StackLayout>
+                                                    </ViewCell>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
                                     </ScrollView>
                                 </StackLayout>
                             </DataTemplate>

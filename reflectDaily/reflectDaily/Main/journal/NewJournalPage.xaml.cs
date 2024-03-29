@@ -15,6 +15,8 @@ namespace reflectDaily.Main.journal
 		public NewJournalPage ()
 		{
 			InitializeComponent ();
+
+            //setting label design
             var date = DateTime.Today.ToString("D");
             var titleView = new Label
             {
@@ -25,7 +27,6 @@ namespace reflectDaily.Main.journal
             };
 
             titleView.Margin = new Thickness(30, 0, 30, 0);
-
             NavigationPage.SetTitleView(this, titleView);
 		}
 
@@ -37,6 +38,8 @@ namespace reflectDaily.Main.journal
                 navigationPage.BarBackgroundColor = (Color)Application.Current.Resources["primary"];
                 navigationPage.BarTextColor = Color.White; // Adjust as needed
             }
+
+
         }
     }
 }
