@@ -112,6 +112,8 @@ namespace reflectDaily.Main.journal
             }
             else
             {
+                carouselQuestion.Position = prevPosition;
+
                 var previousButton = sender as Button;
                 previousButton.IsEnabled = false;
             }

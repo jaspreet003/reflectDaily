@@ -15,6 +15,13 @@ namespace reflectDaily.Main.journal
         public SuccessPage()
         {
             InitializeComponent();
+            DateTime date = DateTime.Today;
+            dateToday.Text = date.ToString("d");
+        }
+
+        private void GotoHomeButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new JournalPage());
         }
     }
 }
