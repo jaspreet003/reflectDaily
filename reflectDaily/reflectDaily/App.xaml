@@ -16,7 +16,7 @@
 
                     <Color x:Key="base">#FAFAFA</Color>
 
-                    <Color x:Key="info">#31708E</Color>
+                    <Color x:Key="info">#31707E</Color>
 
                     <Color x:Key="success">#4CAF50</Color>
 

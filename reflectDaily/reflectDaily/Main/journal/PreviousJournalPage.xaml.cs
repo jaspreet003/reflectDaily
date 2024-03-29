@@ -15,6 +15,7 @@ namespace reflectDaily.Main.journal
 		public PreviousJournalPage ()
 		{
 			InitializeComponent ();
-		}
+           
+        }
 	}
 }
