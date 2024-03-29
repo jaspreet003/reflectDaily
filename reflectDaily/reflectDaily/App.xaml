@@ -5,18 +5,25 @@
 
     <Application.Resources>
 
-        <ResourceDictionary>
+                <ResourceDictionary>
+                    <Color x:Key="primary">#008080</Color>
 
-            <Color x:Key="primary">#B2DFDC</Color>
-            <Color x:Key="secondary">#7EB4B0</Color>
-            <Color x:Key="accent">#FFDD67</Color>
-            <Color x:Key="neutral">#060300</Color>
-            <Color x:Key="base">#fff5ff</Color>
-            <Color x:Key="info">#E0E0E0</Color>
-            <Color x:Key="success">#62B8B3</Color>
-            <Color x:Key="warning">#BEE9E6</Color>
-            <Color x:Key="error">#C33737</Color>
+                    <Color x:Key="secondary">#B2DFDB</Color>
 
+                    <Color x:Key="accent">#FFA726</Color>
+
+                    <Color x:Key="neutral">black</Color>
+
+                    <Color x:Key="base">#FAFAFA</Color>
+
+                    <Color x:Key="info">#31708E</Color>
+
+                    <Color x:Key="success">#4CAF50</Color>
+
+                    <Color x:Key="warning">#FFC107</Color>
+
+                    <Color x:Key="error">#F44336</Color>
+                    
 
         </ResourceDictionary>
 

@@ -3,10 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="reflectDaily.Main.JournalPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+
+        <Grid>
+
+            <Image Source="journalBack.jpg"
+                   Aspect="AspectFill"/>
+
+            <Frame BackgroundColor="{StaticResource secondary}" Opacity="0.3"></Frame>
+            
+            <StackLayout>
+                <Frame Padding="10" BackgroundColor="Transparent">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                        <Label Text="WELCOME" FontSize="Medium" TextColor="{StaticResource neutral}"/>
+                        <Label Text="JASPREET" FontSize="Medium" TextColor="{StaticResource neutral}" FontAttributes="Bold" Margin="0,0,0,5"/>
+                    </StackLayout>
+                </Frame>
+
+
+                <Label x:Name="dateToday" HorizontalOptions="CenterAndExpand" FontSize="25" FontAttributes="Bold" Margin="20" TextColor="White" TextDecorations="None"/>
+                <StackLayout Margin="30" VerticalOptions="FillAndExpand" Spacing="60">
+                    <Button Text="Start Today's Journal" Padding="30" BackgroundColor="{StaticResource primary}" CornerRadius="15" Clicked="TodaysJournalButton_Clicked"
+                    FontSize="15" TextColor="{StaticResource base}" FontAttributes="Bold" BorderColor="{StaticResource secondary}" BorderWidth="2"></Button>
+                    <Button Text="Recent Journals" Padding="30" BackgroundColor="{StaticResource primary}" CornerRadius="25" Clicked="PreviousJournalButton_Clicked"
+                    FontSize="15" TextColor="{StaticResource base}"  FontAttributes="Bold" BorderColor="{StaticResource secondary}" BorderWidth="2"></Button>
+                    <Button Text="Check Average" Padding="30" BackgroundColor="{StaticResource primary}" CornerRadius="25" Clicked="CheckAverageButton_Clicked"
+                    FontSize="15"  TextColor="{StaticResource base}"  FontAttributes="Bold" BorderColor="{StaticResource secondary}" BorderWidth="2"></Button>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>

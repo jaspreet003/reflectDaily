@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            android:TabbedPage.BarSelectedItemColor="#FFFFFF"
-            android:TabbedPage.BarItemColor="#CCCCCC"
-            BarBackgroundColor="#0087D7"
+            
+            BarBackgroundColor="{StaticResource primary}"
+            UnselectedTabColor="{StaticResource base}"
+                        
             xmlns:local="clr-namespace:reflectDaily.Main"         
              x:Class="reflectDaily.Main.HomePage"
             NavigationPage.HasNavigationBar="False">
-    
+
+
     <local:JournalPage Title="Journal" />
     <local:DiaryPage Title="Diary" />
     <local:SettingPage Title="Setting" />

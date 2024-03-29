@@ -32,6 +32,15 @@
     <EmbeddedResource Update="Main\JournalPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Main\journal\AveragePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\journal\NewJournalPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\journal\PreviousJournalPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Main\SettingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -39,7 +48,5 @@
 
   <ItemGroup>
     <Folder Include="Main\diary\" />
-    <Folder Include="Main\journal\" />
-    <Folder Include="Main\setting\" />
   </ItemGroup>
 </Project>
