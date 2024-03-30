@@ -24,7 +24,7 @@
                 </StackLayout>
                 
             </Frame>
-            <Image Source="success.gif" IsAnimationPlaying="True" Aspect="Fill"></Image>
+            <Image Source="success.png" IsAnimationPlaying="True" Aspect="Fill"></Image>
         </StackLayout>
     </ContentPage.Content>
     
