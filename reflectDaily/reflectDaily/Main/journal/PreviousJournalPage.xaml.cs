@@ -12,10 +12,15 @@ namespace reflectDaily.Main.journal
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PreviousJournalPage : ContentPage
 	{
-		public PreviousJournalPage ()
+		public PreviousJournalPage()
 		{
-			InitializeComponent ();
-           
+			InitializeComponent();
+
+		}
+
+        private void ResultButton_Clicked(object sender, EventArgs e)
+        {
+			Navigation.PushAsync(new JournalResultPage());
         }
-	}
+    }
 }
