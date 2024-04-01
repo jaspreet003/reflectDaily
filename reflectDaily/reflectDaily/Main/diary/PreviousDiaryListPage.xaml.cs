@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace reflectDaily.Main
+namespace reflectDaily.Main.diary
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class DiaryPage : ContentPage
+	public partial class PreviousDiaryListPage : ContentPage
 	{
-		public DiaryPage ()
+		public PreviousDiaryListPage ()
 		{
 			InitializeComponent ();
 		}

@@ -24,7 +24,10 @@
     <EmbeddedResource Update="AccountManagement\RegisterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Main\DiaryPage.xaml">
+    <EmbeddedResource Update="Main\diary\NewDiaryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\diary\PreviousDiaryListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\HomePage.xaml">
@@ -54,9 +57,5 @@
     <EmbeddedResource Update="Main\SettingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Main\diary\" />
   </ItemGroup>
 </Project>
