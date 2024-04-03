@@ -1,7 +1,10 @@
-﻿using reflectDaily.Model;
+﻿using Newtonsoft.Json;
+using reflectDaily.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,9 +32,11 @@ namespace reflectDaily.Main.journal
 
             titleView.Margin = new Thickness(30, 0, 30, 0);
             NavigationPage.SetTitleView(this, titleView);
+
+            LoadQuestionsFromJson();
 		}
 
-        List<JournalQuestion> questionList = new List<JournalQuestion>
+        /*List<JournalQuestion> questionList = new List<JournalQuestion>
         {
             new JournalQuestion
             {
@@ -65,7 +70,7 @@ namespace reflectDaily.Main.journal
             }
             
 
-};
+};*/
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -75,9 +80,23 @@ namespace reflectDaily.Main.journal
                 navigationPage.BarTextColor = Color.White;
             }
 
-            carouselQuestion.ItemsSource = questionList;
-
+/*            carouselQuestion.ItemsSource = questionList;
+*/
         }
+
+        private void LoadQuestionsFromJson()
+        {
+            var assembly = typeof(NewJournalPage).GetTypeInfo().Assembly;
+            Stream stream = assembly.GetManifestResourceStream("reflectDaily.questions.json");
+
+            using (var reader = new StreamReader(stream))
+            {
+                var json = reader.ReadToEnd();
+                List<JournalQuestion> questions = JsonConvert.DeserializeObject<List<JournalQuestion>>(json);
+                carouselQuestion.ItemsSource = questions;
+            }
+        }
+
 
         private void carouselQuestion_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
         {
