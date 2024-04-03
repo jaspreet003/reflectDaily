@@ -1,0 +1,59 @@
+
+  [
+    {
+      "questionNumber": "1",
+      "questionDetail": "How do you feel today?",
+      "options": [ "Happy", "Content", "Stressed", "Sad", "Angry", "Anxious" ]
+    },
+    {
+      "questionNumber": "2",
+      "questionDetail": "What was the most impactful thing you did today?",
+      "options": [
+        "Worked on a personal project",
+        "Spent time with family",
+        "Learned something new",
+        "Helped someone",
+        "Took care of my health",
+        "Relaxed"]
+    },
+    {
+      "questionNumber": "3",
+      "questionDetail": "Did you exercise today?",
+      "options": [ "Yes, I had a full workout", "Just a brief walk", "No, but I was active", "Not today" ]
+    },
+    {
+      "questionNumber": "4",
+      "questionDetail": "What did you eat for breakfast?",
+      "options": [ "Skipped breakfast", "Had a coffee/tea", "Ate something light", "Enjoyed a full meal" ]
+    },
+    {
+      "questionNumber": "5",
+      "questionDetail": "What's one thing you're grateful for today?",
+      "options": [ "Family and friends", "Health", "Opportunities", "Achievements", "Learning from challenges" ]
+    },
+    {
+      "questionNumber": "6",
+      "questionDetail": "How many hours did you sleep last night?",
+      "options": [ "Less than 5 hours", "5-6 hours", "7-8 hours", "More than 8 hours" ]
+    },
+    {
+      "questionNumber": "7",
+      "questionDetail": "How much water did you drink today?",
+      "options": [ "Not enough", "About half a gallon", "More than half a gallon", "A full gallon or more" ]
+    },
+    {
+      "questionNumber": "8",
+      "questionDetail": "What was your main stressor today?",
+      "options": [ "Work", "Personal relationships", "Finances", "Health issues", "I wasn't stressed today" ]
+    },
+    {
+      "questionNumber": "9",
+      "questionDetail": "Did you meditate or engage in any mindfulness practice today?",
+      "options": [ "Yes, and it was refreshing", "A little bit", "No, but I wanted to", "Not interested in it" ]
+    },
+    {
+      "questionNumber": "10",
+      "questionDetail": "How would you describe your productivity today?",
+      "options": [ "Very productive", "Moderately productive", "Not very productive", "I took a day off" ]
+    }
+  ]

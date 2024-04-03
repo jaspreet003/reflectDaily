@@ -12,9 +12,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="questions.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="25.1.37" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="questions.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,12 +30,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="AccountManagement\RegisterPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Main\diary\NewDiaryPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Main\diary\PreviousDiaryListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\HomePage.xaml">

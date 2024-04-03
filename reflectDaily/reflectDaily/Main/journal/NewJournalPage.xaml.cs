@@ -30,6 +30,7 @@ namespace reflectDaily.Main.journal
             titleView.Margin = new Thickness(30, 0, 30, 0);
             NavigationPage.SetTitleView(this, titleView);
 		}
+
         List<JournalQuestion> questionList = new List<JournalQuestion>
         {
             new JournalQuestion
