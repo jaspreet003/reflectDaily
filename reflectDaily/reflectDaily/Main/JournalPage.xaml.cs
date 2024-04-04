@@ -16,9 +16,17 @@ namespace reflectDaily.Main
 		public JournalPage ()
 		{
 			InitializeComponent ();
-			DateTime thisDate = DateTime.Today;
-			dateToday.Text = thisDate.ToString("D");
-		}
+
+            // Set the label to display the username
+            if (Application.Current.Properties.TryGetValue("Username", out var username))
+            {
+                this.username.Text = username as string;
+            }
+
+            // set the date
+            DateTime thisDate = DateTime.Today;
+            dateToday.Text = thisDate.ToString("D");
+        }
 
         private void TodaysJournalButton_Clicked(object sender, EventArgs e)
         {

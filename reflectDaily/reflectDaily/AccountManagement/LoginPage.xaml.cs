@@ -49,6 +49,11 @@ namespace reflectDaily.AccountManagement
 
             if (user != null)
             {
+                //saving username
+                var loggedInUsername = user.Username;
+                Application.Current.Properties["Username"] = loggedInUsername;
+
+                await Application.Current.SavePropertiesAsync();
                 await DisplayAlert("Login Success", "You have successfully logged in.", "OK");
                 await Navigation.PushAsync(new HomePage());
 

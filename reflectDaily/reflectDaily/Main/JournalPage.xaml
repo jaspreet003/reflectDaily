@@ -17,7 +17,7 @@
                 <Frame Padding="10" BackgroundColor="Transparent">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                         <Label Text="WELCOME" FontSize="Medium" TextColor="{DynamicResource neutral}"/>
-                        <Label Text="JASPREET" FontSize="Medium" TextColor="{DynamicResource neutral}" FontAttributes="Bold" Margin="0,0,0,5"/>
+                        <Label x:Name="username" Text="JASPREET" FontSize="Medium" TextColor="{DynamicResource neutral}" FontAttributes="Bold" Margin="0,0,0,5"/>
                     </StackLayout>
                 </Frame>
 
