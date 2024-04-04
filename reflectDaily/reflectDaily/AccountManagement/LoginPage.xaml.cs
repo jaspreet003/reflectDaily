@@ -3,7 +3,9 @@ using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using reflectDaily.Model;
-using System.Threading.Tasks; // For Task
+using System.Threading.Tasks;
+using System;
+using reflectDaily.Main; // For Task
 
 namespace reflectDaily.AccountManagement
 {
@@ -21,17 +23,17 @@ namespace reflectDaily.AccountManagement
             registerLabel.GestureRecognizers.Add(tapGestureRecognizer);
         }
 
-        protected override async void OnAppearing() // Make sure this is async
+        protected override async void OnAppearing() 
         {
             base.OnAppearing();
             var con = new SQLiteAsyncConnection(App.DatabaseLocation);
-            await con.CreateTableAsync<User>(); // Asynchronously ensure the table exists
+            await con.CreateTableAsync<User>(); 
         }
 
-        private async void LoginButton_Clicked(object sender, EventArgs e) // Make this method async
+        private async void LoginButton_Clicked(object sender, EventArgs e) 
         {
-            var email = email.Text;
-            var password = password.Text;
+            var email = emailEntry.Text;
+            var password = passwordEntry.Text;
 
             // Input validation
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
@@ -41,20 +43,18 @@ namespace reflectDaily.AccountManagement
             }
 
             var con = new SQLiteAsyncConnection(App.DatabaseLocation);
-            await con.CreateTableAsync<User>(); // Ensure the table exists
+            await con.CreateTableAsync<User>(); 
 
-            // Query the database asynchronously for a user matching the email and password
             var user = await con.Table<User>().Where(u => u.Email == email && u.Password == password).FirstOrDefaultAsync();
 
             if (user != null)
             {
-                // Success
                 await DisplayAlert("Login Success", "You have successfully logged in.", "OK");
-                // Proceed to next page or operation
+                await Navigation.PushAsync(new HomePage());
+
             }
             else
             {
-                // Failure
                 await DisplayAlert("Login Failed", "Incorrect email or password.", "OK");
             }
         }

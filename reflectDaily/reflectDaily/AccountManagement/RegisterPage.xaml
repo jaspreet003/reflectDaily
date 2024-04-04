@@ -12,7 +12,7 @@
 
                 <StackLayout VerticalOptions="FillAndExpand">
 
-                    <Button Text=" &lt; Back to Login" FontAttributes="Italic" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Start" Clicked="RegisterButton_Clicked"></Button>
+                    <Button Text=" &lt; Back to Login" FontAttributes="Italic" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Start" Clicked="BacktoLoginButton_Clicked"></Button>
 
                     <StackLayout VerticalOptions="FillAndExpand" Margin="20">
                     <Image Source="logo.png" WidthRequest="300" HeightRequest="150"></Image>
@@ -38,7 +38,7 @@
 
                     <BoxView HeightRequest="40" />
 
-                    <Button Text="REGISTER" TextColor="White" FontAttributes="Bold" FontSize="20" BackgroundColor="SaddleBrown" CornerRadius="15" HeightRequest="65" ></Button>
+                    <Button Text="REGISTER" TextColor="White" FontAttributes="Bold" FontSize="20" BackgroundColor="SaddleBrown" CornerRadius="15" HeightRequest="65" Clicked="RegisterButton_Clicked" ></Button>
                     </StackLayout>
 
                 </StackLayout>
