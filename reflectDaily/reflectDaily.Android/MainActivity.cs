@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Android.Views;
+using System.IO;
 
 namespace reflectDaily.Droid
 {
@@ -21,7 +22,13 @@ namespace reflectDaily.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+
+            //create a path for database
+            string dbName = "myDB.sqlite";
+            string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string databaseLocationPath = Path.Combine(folderPath, dbName);
+
+            LoadApplication(new App(databaseLocationPath));// call constructor with database location.
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

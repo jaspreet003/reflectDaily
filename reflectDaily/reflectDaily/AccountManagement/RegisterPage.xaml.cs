@@ -1,4 +1,6 @@
-﻿using System;
+﻿using reflectDaily.Model;
+using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +21,29 @@ namespace reflectDaily.AccountManagement
 
         private void RegisterButton_Clicked(object sender, EventArgs e)
         {
+			User user = new User()
+			{
+				Username = username.Text,
+				Email = email.Text,
+				Password = password.Text,
+			};
 
-			Navigation.PushAsync(new LoginPage());
+			using (SQLiteConnection con =  new SQLiteConnection(App.DatabaseLocation))
+			{
+				con.CreateTable<User> ();
+				int row = con.Insert(user);
+				con.Close ();
+
+                if (row > 0)
+                {
+                    DisplayAlert("Success", "Account Created", "OK");
+                    Navigation.PushAsync(new LoginPage());
+                }
+                else
+                {
+                    DisplayAlert("Failed", "Check again", "OK");
+                }
+            }
 
         }
     }
