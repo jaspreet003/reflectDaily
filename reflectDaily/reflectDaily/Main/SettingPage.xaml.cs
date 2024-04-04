@@ -19,6 +19,8 @@ namespace reflectDaily.Main
 	public partial class SettingPage : ContentPage
 	{
         private string selectedThemeName;
+        private Frame previouslySelectedFrame = null;
+
 
         public SettingPage ()
 		{
@@ -41,23 +43,63 @@ namespace reflectDaily.Main
             if (sender is Frame frame && frame.BindingContext is Theme theme)
             {
                 selectedThemeName = theme.Name;
+
+                if (previouslySelectedFrame != null)
+                {
+                    previouslySelectedFrame.BorderColor = Color.Transparent; 
+                    previouslySelectedFrame.HasShadow = false;
+                }
+
+                frame.BorderColor = Color.Black; 
+                frame.HasShadow = true;
+
+                previouslySelectedFrame = frame;
             }
         }
 
         private void RandomThemeTapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
+            selectedThemeName = "Random";
+
+            if (previouslySelectedFrame != null)
+            {
+                previouslySelectedFrame.BorderColor = Color.Transparent; 
+                previouslySelectedFrame.HasShadow = false;
+                previouslySelectedFrame = null; 
+            }
+
+            if (sender is Frame randomFrame)
+            {
+                randomFrame.BorderColor = Color.Black;
+                randomFrame.HasShadow = true; 
+
+                previouslySelectedFrame = randomFrame; 
+            }
+
 
         }
 
         private void UpdateButton_Clicked(object sender, EventArgs e)
         {
             var themes = ThemeColour.LoadThemes();
-            var selectedTheme = themes.FirstOrDefault(t => t.Name == selectedThemeName);
+            Theme selectedTheme;
+
+            if (selectedThemeName == "Random")
+            {
+                // If "Random" is selected, fetch the random theme from the themes list
+                selectedTheme = themes.FirstOrDefault(t => t.Name == "Random");
+            }
+            else
+            {
+                // Otherwise, find the theme by the selected name
+                selectedTheme = themes.FirstOrDefault(t => t.Name == selectedThemeName);
+            }
 
             if (selectedTheme != null)
             {
                 ThemeColour.ApplyTheme(selectedTheme);
             }
+            
         }
     }
 }
