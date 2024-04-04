@@ -20,12 +20,26 @@ namespace reflectDaily.Main
 	{
         private string selectedThemeName;
         private Frame previouslySelectedFrame = null;
+        private User currentUser;
 
 
         public SettingPage ()
 		{
 			InitializeComponent ();
+            usernameLabel.Text = currentUser.Username;
+            LoadCurrentUser ();
+        }
 
+        private async void LoadCurrentUser()
+        {
+            if (Application.Current.Properties.TryGetValue("User", out var userJson) && userJson is string jsonString)
+            {
+                currentUser = JsonConvert.DeserializeObject<User>(jsonString);
+
+                username.Text = currentUser.Username;
+                email.Text = currentUser.Email;
+                password.Text = currentUser.Password; 
+            }
         }
 
         protected override void OnAppearing()
@@ -79,8 +93,10 @@ namespace reflectDaily.Main
 
         }
 
-        private void UpdateButton_Clicked(object sender, EventArgs e)
+        private async void UpdateButton_Clicked(object sender, EventArgs e)
         {
+
+            // *********** update theme ***********************
             var themes = ThemeColour.LoadThemes();
             Theme selectedTheme;
 
@@ -99,7 +115,24 @@ namespace reflectDaily.Main
             {
                 ThemeColour.ApplyTheme(selectedTheme);
             }
-            
+
+            //********** update user info *********************
+            currentUser.Username = username.Text;
+            currentUser.Email = email.Text;
+            currentUser.Password = password.Text;
+
+            int updateCount = User.UpdateUser(currentUser, App.DatabaseLocation);
+
+            if (updateCount > 0)
+            {
+                await DisplayAlert("Success", "User information updated successfully.", "OK");
+                // Optionally, navigate away or refresh UI
+            }
+            else
+            {
+                await DisplayAlert("Error", "Failed to update user information.", "OK");
+            }
+
         }
     }
 }

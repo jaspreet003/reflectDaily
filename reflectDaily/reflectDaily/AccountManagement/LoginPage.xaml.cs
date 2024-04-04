@@ -5,7 +5,8 @@ using Xamarin.Forms.Xaml;
 using reflectDaily.Model;
 using System.Threading.Tasks;
 using System;
-using reflectDaily.Main; // For Task
+using reflectDaily.Main;
+using Newtonsoft.Json;
 
 namespace reflectDaily.AccountManagement
 {
@@ -49,9 +50,10 @@ namespace reflectDaily.AccountManagement
 
             if (user != null)
             {
-                //saving username
-                var loggedInUsername = user.Username;
-                Application.Current.Properties["Username"] = loggedInUsername;
+                //saving user as jsonObject
+                var userJson = JsonConvert.SerializeObject(user);
+                Application.Current.Properties["User"] = userJson;
+                await Application.Current.SavePropertiesAsync();
 
                 await Application.Current.SavePropertiesAsync();
                 await DisplayAlert("Login Success", "You have successfully logged in.", "OK");

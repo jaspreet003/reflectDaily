@@ -1,4 +1,6 @@
-﻿using reflectDaily.Main.journal;
+﻿using Newtonsoft.Json;
+using reflectDaily.Main.journal;
+using reflectDaily.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +20,10 @@ namespace reflectDaily.Main
 			InitializeComponent ();
 
             // Set the label to display the username
-            if (Application.Current.Properties.TryGetValue("Username", out var username))
+            if (Application.Current.Properties.TryGetValue("User", out var userJson) && userJson is string jsonString)
             {
-                this.username.Text = username as string;
+                var user = JsonConvert.DeserializeObject<User>(jsonString);
+                this.username.Text = user.Username;
             }
 
             // set the date
