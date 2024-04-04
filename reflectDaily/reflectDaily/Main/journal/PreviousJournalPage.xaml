@@ -7,14 +7,14 @@
         <StackLayout Margin="20,30" Spacing="30">
             <Label Text="Select Date"                   
                 HorizontalOptions="CenterAndExpand" 
-                   TextColor="{StaticResource neutral}"
+                   TextColor="{DynamicResource neutral}"
                    FontSize="Medium"/>
 
             <syncfusion:SfCalendar x:Name="calendar"
                                    SelectionMode="SingleSelection">
             </syncfusion:SfCalendar>
 
-            <Button Text="See Result" Padding="20" CornerRadius="15" BackgroundColor="{StaticResource primary}" TextColor="White" FontSize="17" FontAttributes="Bold" Clicked="ResultButton_Clicked"></Button>
+            <Button Text="See Result" Padding="20" CornerRadius="15" BackgroundColor="{DynamicResource primary}" TextColor="White" FontSize="17" FontAttributes="Bold" Clicked="ResultButton_Clicked"></Button>
             
            
 

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <None Remove="questions.json" />
+    <None Remove="theme.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="questions.json" />
+    <EmbeddedResource Include="theme.json" />
   </ItemGroup>
 
   <ItemGroup>

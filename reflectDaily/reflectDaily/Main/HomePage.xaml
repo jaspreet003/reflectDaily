@@ -4,8 +4,8 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
             
-            BarBackgroundColor="{StaticResource primary}"
-            UnselectedTabColor="{StaticResource base}"
+            BarBackgroundColor="{DynamicResource primary}"
+            UnselectedTabColor="{DynamicResource base}"
                         
             xmlns:local="clr-namespace:reflectDaily.Main"         
              x:Class="reflectDaily.Main.HomePage"

@@ -7,19 +7,19 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="#fefcfe">
 
-            <Frame HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource primary}" HeightRequest="40">
-                <Button BackgroundColor="Transparent" HorizontalOptions="Start" Text="&lt; Back to Home Page" TextColor="{StaticResource base}" FontAttributes="Italic" Clicked="GotoHomeButton_Clicked"></Button>
+            <Frame HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource primary}" HeightRequest="40">
+                <Button BackgroundColor="Transparent" HorizontalOptions="Start" Text="&lt; Back to Home Page" TextColor="{DynamicResource base}" FontAttributes="Italic" Clicked="GotoHomeButton_Clicked"></Button>
             </Frame>
             
             <Frame VerticalOptions="FillAndExpand" BackgroundColor="Transparent" Margin="30">
                 
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                    <Label Text="JOURNAL SAVE" TextColor="{StaticResource primary}" FontSize="25"
+                    <Label Text="JOURNAL SAVE" TextColor="{DynamicResource primary}" FontSize="25"
                            HorizontalTextAlignment="Center"></Label>
-                    <Label Text=" FOR" TextColor="{StaticResource primary}" FontSize="25"
+                    <Label Text=" FOR" TextColor="{DynamicResource primary}" FontSize="25"
                            HorizontalTextAlignment="Center"></Label>
                     
-                    <Label x:Name="dateToday" TextColor="{StaticResource primary}" FontSize="38"
+                    <Label x:Name="dateToday" TextColor="{DynamicResource primary}" FontSize="38"
                            HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
                 </StackLayout>
                 

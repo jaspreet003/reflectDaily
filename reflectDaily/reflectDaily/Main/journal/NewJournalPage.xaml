@@ -3,7 +3,7 @@
              x:Class="reflectDaily.Main.journal.NewJournalPage">
     <ContentPage.Content>
         <StackLayout>
-            <Frame Margin="30" BackgroundColor="{StaticResource primary}" VerticalOptions="FillAndExpand" Padding="30" CornerRadius="20" HasShadow="True">
+            <Frame Margin="30" BackgroundColor="{DynamicResource primary}" VerticalOptions="FillAndExpand" Padding="30" CornerRadius="20" HasShadow="True">
                 <StackLayout VerticalOptions="FillAndExpand">
                     <CarouselView x:Name="carouselQuestion" CurrentItemChanged="carouselQuestion_CurrentItemChanged">
                         <CarouselView.ItemsLayout>
@@ -21,7 +21,7 @@
                                         <StackLayout BindableLayout.ItemsSource="{Binding options}" Spacing="20">
                                             <BindableLayout.ItemTemplate>
                                                 <DataTemplate>
-                                                    <Button Text="{Binding .}" BackgroundColor="{StaticResource base}" CornerRadius="10"/>
+                                                    <Button Text="{Binding .}" BackgroundColor="{DynamicResource base}" CornerRadius="10"/>
                                                 </DataTemplate>
                                             </BindableLayout.ItemTemplate>
                                         </StackLayout>
@@ -35,8 +35,8 @@
 
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="15">
-                        <Button  Text="PREVIOUS" BackgroundColor="{StaticResource accent}" CornerRadius="10" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="PreviousButton_Clicked"></Button>
-                        <Button  Text="NEXT" BackgroundColor="{StaticResource accent}" CornerRadius="10" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="NextButton_Clicked"></Button>
+                        <Button  Text="PREVIOUS" BackgroundColor="{DynamicResource accent}" CornerRadius="10" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="PreviousButton_Clicked"></Button>
+                        <Button  Text="NEXT" BackgroundColor="{DynamicResource accent}" CornerRadius="10" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="NextButton_Clicked"></Button>
                     </StackLayout>
                 </StackLayout>
             </Frame>
