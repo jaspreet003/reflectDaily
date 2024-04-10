@@ -16,6 +16,9 @@ namespace reflectDaily.Main.journal
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewJournalPage : ContentPage
 	{
+
+        private Button PreviousOptionSelected;
+        private int questionPosition;
 		public NewJournalPage ()
 		{
 			InitializeComponent ();
@@ -34,7 +37,11 @@ namespace reflectDaily.Main.journal
             NavigationPage.SetTitleView(this, titleView);
 
             LoadQuestionsFromJson();
-		}
+
+            
+
+
+        }
 
         /*List<JournalQuestion> questionList = new List<JournalQuestion>
         {
@@ -80,8 +87,11 @@ namespace reflectDaily.Main.journal
                 navigationPage.BarTextColor = Color.White;
             }
 
-/*            carouselQuestion.ItemsSource = questionList;
-*/
+            /*            carouselQuestion.ItemsSource = questionList;
+            */
+
+            //disabling previous button for first question
+            
         }
 
         private void LoadQuestionsFromJson()
@@ -94,6 +104,12 @@ namespace reflectDaily.Main.journal
                 var json = reader.ReadToEnd();
                 List<JournalQuestion> questions = JsonConvert.DeserializeObject<List<JournalQuestion>>(json);
                 carouselQuestion.ItemsSource = questions;
+            }
+
+            questionPosition = carouselQuestion.Position;
+            if (questionPosition == 0)
+            {
+                previousButton.IsEnabled = false;
             }
         }
 
@@ -110,33 +126,63 @@ namespace reflectDaily.Main.journal
             if (nextPosition < ((carouselQuestion.ItemsSource as IEnumerable<object>).Count() - 1) )
             {
                 carouselQuestion.Position = nextPosition;
+                questionPosition++;
+
             }
             else if(nextPosition < (carouselQuestion.ItemsSource as IEnumerable<object>).Count())
             {
                 carouselQuestion.Position = nextPosition;
                 var nextButton = sender as Button;
                 nextButton.Text = "SUBMIT";
+                questionPosition++;
             }
             else
             {
                 Navigation.PushAsync(new SuccessPage());
+            }
+
+            if(questionPosition > 0)
+            {
+                previousButton.IsEnabled = true;
             }
         }
 
         private void PreviousButton_Clicked(object sender, EventArgs e)
         {
             int prevPosition = carouselQuestion.Position - 1;
+            var previousButton = sender as Button;
+
             if (prevPosition > 0)
             {
                 carouselQuestion.Position = prevPosition;
+                previousButton.IsEnabled = true;
+
             }
-            else
+            else if (prevPosition == 0)
             {
                 carouselQuestion.Position = prevPosition;
-
-                var previousButton = sender as Button;
                 previousButton.IsEnabled = false;
             }
+            else {
+                carouselQuestion.Position = prevPosition;
+                previousButton.IsEnabled = true;
+
+            }
+        }
+
+        private void OptionButton_Clicked(object sender, EventArgs e)
+        {
+            var optionButton = sender as Button;
+
+            if (PreviousOptionSelected != null) {
+
+                PreviousOptionSelected.BackgroundColor = (Color)Application.Current.Resources["base"];
+
+            }
+
+            optionButton.BackgroundColor = (Color)Application.Current.Resources["secondary"];
+            PreviousOptionSelected = optionButton;
+
         }
     }
 }
