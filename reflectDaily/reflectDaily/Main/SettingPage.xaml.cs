@@ -26,7 +26,6 @@ namespace reflectDaily.Main
         public SettingPage ()
 		{
 			InitializeComponent ();
-            usernameLabel.Text = currentUser.Username;
             LoadCurrentUser ();
         }
 
@@ -35,6 +34,7 @@ namespace reflectDaily.Main
             if (Application.Current.Properties.TryGetValue("User", out var userJson) && userJson is string jsonString)
             {
                 currentUser = JsonConvert.DeserializeObject<User>(jsonString);
+                usernameLabel.Text = currentUser.Username;
 
                 username.Text = currentUser.Username;
                 email.Text = currentUser.Email;
@@ -120,6 +120,8 @@ namespace reflectDaily.Main
             currentUser.Username = username.Text;
             currentUser.Email = email.Text;
             currentUser.Password = password.Text;
+            usernameLabel.Text = currentUser.Username;
+
 
             int updateCount = User.UpdateUser(currentUser, App.DatabaseLocation);
 
