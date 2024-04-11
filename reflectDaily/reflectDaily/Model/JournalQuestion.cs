@@ -9,6 +9,7 @@ namespace reflectDaily.Model
         public String questionNumber { get; set; }
         public String questionDetail { get; set; }
         public List<String> options { get; set; }
+        public string SelectedOption { get; set; }
 
     }
 }
