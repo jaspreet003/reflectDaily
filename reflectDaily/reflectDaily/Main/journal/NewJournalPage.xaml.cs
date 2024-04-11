@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using reflectDaily.Model;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +20,10 @@ namespace reflectDaily.Main.journal
 
         private Button PreviousOptionSelected;
         private int questionPosition;
-		public NewJournalPage ()
+        List<JournalQuestion> questions;
+
+        List<PlayerResponse> responseList = new List<PlayerResponse>();
+        public NewJournalPage ()
 		{
 			InitializeComponent ();
 
@@ -87,11 +91,20 @@ namespace reflectDaily.Main.journal
                 navigationPage.BarTextColor = Color.White;
             }
 
+            questionPosition = carouselQuestion.Position;
+
+            if (questionPosition == 0)
+            {
+                previousButton.IsEnabled = false;
+            }
+
+            nextButton.IsEnabled = false;
+
             /*            carouselQuestion.ItemsSource = questionList;
             */
 
             //disabling previous button for first question
-            
+
         }
 
         private void LoadQuestionsFromJson()
@@ -102,24 +115,19 @@ namespace reflectDaily.Main.journal
             using (var reader = new StreamReader(stream))
             {
                 var json = reader.ReadToEnd();
-                List<JournalQuestion> questions = JsonConvert.DeserializeObject<List<JournalQuestion>>(json);
+                questions = JsonConvert.DeserializeObject<List<JournalQuestion>>(json);
+
                 carouselQuestion.ItemsSource = questions;
             }
 
-            questionPosition = carouselQuestion.Position;
-            if (questionPosition == 0)
-            {
-                previousButton.IsEnabled = false;
-            }
         }
-
 
         private void carouselQuestion_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
         {
 
         }
 
-        private void NextButton_Clicked(object sender, EventArgs e)
+        private async void NextButton_Clicked(object sender, EventArgs e)
         {
             int nextPosition = carouselQuestion.Position + 1;
 
@@ -127,6 +135,12 @@ namespace reflectDaily.Main.journal
             {
                 carouselQuestion.Position = nextPosition;
                 questionPosition++;
+
+                nextButton.IsEnabled = false;
+
+                var currentQuestion = questions[carouselQuestion.Position];
+
+                UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
 
             }
             else if(nextPosition < (carouselQuestion.ItemsSource as IEnumerable<object>).Count())
@@ -138,13 +152,17 @@ namespace reflectDaily.Main.journal
             }
             else
             {
-                Navigation.PushAsync(new SuccessPage());
+                await SaveResponsesToDatabase();
+                await Navigation.PushAsync(new SuccessPage());
             }
 
             if(questionPosition > 0)
             {
                 previousButton.IsEnabled = true;
             }
+
+
+          
         }
 
         private void PreviousButton_Clicked(object sender, EventArgs e)
@@ -168,6 +186,8 @@ namespace reflectDaily.Main.journal
                 previousButton.IsEnabled = true;
 
             }
+
+            nextButton.IsEnabled = true;
         }
 
         private void OptionButton_Clicked(object sender, EventArgs e)
@@ -183,6 +203,67 @@ namespace reflectDaily.Main.journal
             optionButton.BackgroundColor = (Color)Application.Current.Resources["secondary"];
             PreviousOptionSelected = optionButton;
 
+            nextButton.IsEnabled = true;
+
         }
+
+        private void UpdateOrCreateResponse(JournalQuestion currentQuestion, string selectedOption)
+        {
+            if (currentQuestion != null)
+            {
+                var currentQuestionPostion = Convert.ToInt32(currentQuestion.questionNumber) - 1;
+
+
+                if (responseList.Count > 0)
+                {
+                    foreach (var response in responseList)
+                    {
+                        if (Convert.ToString(currentQuestionPostion) == response.QuestionId)
+                        {
+                            response.SelectedOption = selectedOption;
+                            response.ResponseDate = DateTime.Now.Date;
+
+                        }
+                        else
+                        {
+                            // If not found, create a new response
+                            var newResponse = new PlayerResponse
+                            {
+                                UserId = App.loggedUserObj.Id,
+                                QuestionId = currentQuestion.questionNumber,
+                                SelectedOption = selectedOption,
+                                ResponseDate = DateTime.Now.Date
+                            };
+
+                            // Add the new response to the list
+                            responseList.Add(newResponse);
+                        }
+                    }
+
+                }
+
+            }
+        }
+        private async Task SaveResponsesToDatabase()
+        {
+            using (var conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                conn.CreateTable<PlayerResponse>();
+                foreach (var response in responseList)
+                {
+                    var existingResponse = conn.Table<PlayerResponse>().FirstOrDefault(r => r.QuestionId == response.QuestionId && r.UserId == response.UserId && r.ResponseDate == response.ResponseDate);
+                    if (existingResponse != null)
+                    {
+                        existingResponse.SelectedOption = response.SelectedOption;
+                        conn.Update(existingResponse);
+                    }
+                    else
+                    {
+                        conn.Insert(response);
+                    }
+                }
+            }
+        }
+
     }
 }
