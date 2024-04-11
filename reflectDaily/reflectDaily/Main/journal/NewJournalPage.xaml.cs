@@ -173,9 +173,8 @@ namespace reflectDaily.Main.journal
         private void OptionButton_Clicked(object sender, EventArgs e)
         {
             var optionButton = sender as Button;
-            var question = carouselQuestion.CurrentItem as JournalQuestion;
 
-            if (PreviousOptionSelected != null && PreviousOptionSelected != optionButton) {
+            if (PreviousOptionSelected != null) {
 
                 PreviousOptionSelected.BackgroundColor = (Color)Application.Current.Resources["base"];
 
@@ -183,8 +182,6 @@ namespace reflectDaily.Main.journal
 
             optionButton.BackgroundColor = (Color)Application.Current.Resources["secondary"];
             PreviousOptionSelected = optionButton;
-
-            question.SelectedOption = optionButton.Text;
 
         }
     }

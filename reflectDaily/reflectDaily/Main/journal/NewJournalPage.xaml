@@ -21,7 +21,7 @@
                                         <StackLayout BindableLayout.ItemsSource="{Binding options}" Spacing="20">
                                             <BindableLayout.ItemTemplate>
                                                 <DataTemplate>
-                                                    <Button Text="{Binding .}" BackgroundColor="{DynamicResource base}" Command="{Binding Source={x:Reference carouselQuestion}, Path=BindingContext.OptionSelectedCommand}" CornerRadius="10" Clicked="OptionButton_Clicked"/>
+                                                    <Button Text="{Binding .}" BackgroundColor="{DynamicResource base}" CornerRadius="10" Clicked="OptionButton_Clicked"/>
                                                 </DataTemplate>
                                             </BindableLayout.ItemTemplate>
                                         </StackLayout>
