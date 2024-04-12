@@ -21,7 +21,7 @@
                                         <StackLayout BindableLayout.ItemsSource="{Binding options}" Spacing="20">
                                             <BindableLayout.ItemTemplate>
                                                 <DataTemplate>
-                                                    <Button Text="{Binding .}" BackgroundColor="{DynamicResource base}" CornerRadius="10"/>
+                                                    <Button Text="{Binding .}" BackgroundColor="{DynamicResource base}" CornerRadius="10" Clicked="OptionButton_Clicked"/>
                                                 </DataTemplate>
                                             </BindableLayout.ItemTemplate>
                                         </StackLayout>
@@ -35,8 +35,8 @@
 
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="15">
-                        <Button  Text="PREVIOUS" BackgroundColor="{DynamicResource accent}" CornerRadius="10" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="PreviousButton_Clicked"></Button>
-                        <Button  Text="NEXT" BackgroundColor="{DynamicResource accent}" CornerRadius="10" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="NextButton_Clicked"></Button>
+                        <Button x:Name="previousButton"  Text="PREVIOUS" BackgroundColor="{DynamicResource accent}" CornerRadius="10" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="PreviousButton_Clicked"></Button>
+                        <Button x:Name="nextButton" Text="NEXT" BackgroundColor="{DynamicResource accent}" CornerRadius="10" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="NextButton_Clicked"></Button>
                     </StackLayout>
                 </StackLayout>
             </Frame>

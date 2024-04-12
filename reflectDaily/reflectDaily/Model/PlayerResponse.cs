@@ -17,5 +17,12 @@ namespace reflectDaily.Model
         public string SelectedOption { get; set; }
 
         public DateTime ResponseDate { get; set; }
+
+
+        public override string ToString()
+        {
+            return ": " + "ID : " + Id + "\n" + " USER ID : "  +  UserId + "\n" + "QUESTION ID : "  + QuestionId + "\n" + " OPTION : " + SelectedOption + "\n"  + "DATE : " + ResponseDate;
+        }
+
     }
 }
