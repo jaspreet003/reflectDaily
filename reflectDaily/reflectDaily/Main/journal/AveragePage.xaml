@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+             x:Class="reflectDaily.Main.journal.AveragePage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+
+        <StackLayout>
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="0">
+                <Button Text="&lt; Back to Home" FontAttributes="Italic" FontSize="12" TextColor="{DynamicResource neutral}" BackgroundColor="Transparent" Clicked="Button_Clicked"></Button>
+            </StackLayout>
+
+
+            <StackLayout  Margin="20,30" Spacing="30" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" Spacing="20">
+                    <Button Text="Last Week" BackgroundColor="{DynamicResource secondary}" HorizontalOptions="FillAndExpand" Clicked="LastWeekAvgButton_Clicked"></Button>
+                    <Button Text="Last Month" BackgroundColor="{DynamicResource secondary}" HorizontalOptions="FillAndExpand" Clicked="LastMonthButton_Clicked"></Button>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                    <Label Text="-------------------------------------" TextColor="{DynamicResource info}"></Label>
+                    <Label Text="OR" HorizontalOptions="CenterAndExpand" TextColor="{DynamicResource info}"></Label>
+                    <Label Text="-------------------------------------" TextColor="{DynamicResource info}"></Label>
+
+
+                </StackLayout>
+
+                <StackLayout Spacing="30">
+                <StackLayout Orientation="Horizontal" Spacing="20">
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Label Text="Start Date" TextColor="{DynamicResource neutral}"></Label>
+                        <Button Text="" Margin="0" Clicked="StartDateButton_Clicked" TextColor="Black"></Button>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Label Text="End Date" TextColor="{DynamicResource neutral}"></Label>
+                        <Button Text="" Margin="0" Clicked="EndDateButton_Clicked" TextColor="Black"></Button>
+                    </StackLayout>
+                </StackLayout>
+
+                <syncfusion:SfCalendar x:Name="calendar"
+                                   SelectionMode="SingleSelection" IsVisible="false">
+                </syncfusion:SfCalendar>
+
+                <Button Text="CHECK" Padding="15" BackgroundColor="{DynamicResource primary}" TextColor="{DynamicResource base}" FontAttributes="Bold" CornerRadius="10" Clicked="CheckButton_Clicked"></Button>
+                </StackLayout>
+
+            </StackLayout>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

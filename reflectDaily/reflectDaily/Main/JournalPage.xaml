@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="reflectDaily.Main.JournalPage"
+            NavigationPage.HasNavigationBar="False">
+               
+    <ContentPage.Content>
+
+        <Grid>
+
+            <Image Source="journalBack.jpg"
+                   Aspect="AspectFill"/>
+
+            <Frame BackgroundColor="{DynamicResource secondary}" Opacity="0.3"></Frame>
+            
+            <StackLayout>
+                <Frame Padding="10" BackgroundColor="Transparent">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                        <Label Text="WELCOME" FontSize="Medium" TextColor="{DynamicResource neutral}"/>
+                        <Label x:Name="username" Text="JASPREET" FontSize="Medium" TextColor="{DynamicResource neutral}" FontAttributes="Bold" Margin="0,0,0,5"/>
+                    </StackLayout>
+                </Frame>
+
+
+                <Label x:Name="dateToday" HorizontalOptions="CenterAndExpand" FontSize="25" FontAttributes="Bold" Margin="20" TextColor="White" TextDecorations="None"/>
+                <StackLayout Margin="30" VerticalOptions="FillAndExpand" Spacing="60">
+                    <Button Text="Start Today's Journal" Padding="30" BackgroundColor="{DynamicResource primary}" CornerRadius="15" Clicked="TodaysJournalButton_Clicked"
+                    FontSize="15" TextColor="{DynamicResource base}" FontAttributes="Bold" BorderColor="{DynamicResource secondary}" BorderWidth="2"></Button>
+                    <Button Text="Recent Journals" Padding="30" BackgroundColor="{DynamicResource primary}" CornerRadius="25" Clicked="PreviousJournalButton_Clicked"
+                    FontSize="15" TextColor="{DynamicResource base}"  FontAttributes="Bold" BorderColor="{DynamicResource secondary}" BorderWidth="2"></Button>
+                    <Button Text="Check Average" Padding="30" BackgroundColor="{DynamicResource primary}" CornerRadius="25" Clicked="CheckAverageButton_Clicked"
+                    FontSize="15"  TextColor="{DynamicResource base}"  FontAttributes="Bold" BorderColor="{DynamicResource secondary}" BorderWidth="2"></Button>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

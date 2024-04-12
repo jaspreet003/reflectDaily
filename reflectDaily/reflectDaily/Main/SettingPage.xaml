@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="reflectDaily.Main.SettingPage"
+             xmlns:tool="http://xamarin.com/schemas/2020/toolkit">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <Frame>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Hello" FontSize="20"></Label>
+                    <Label x:Name="usernameLabel" Text="Jaspreet" FontSize="20"></Label>
+                </StackLayout>
+            </Frame>
+
+
+            <StackLayout Margin="30"  VerticalOptions="FillAndExpand">
+                <Label Text="USERNAME" TextColor="Black" FontSize="15"></Label>
+                <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="45" Padding="10,0" WidthRequest="100">
+                    <Entry x:Name="username" TextColor="Black" Keyboard="Email" HeightRequest="30" FontSize="15" Margin="0" WidthRequest="50"></Entry>
+                </Frame>
+
+                <BoxView HeightRequest="20"></BoxView>
+
+                <Label Text="EMAIL" TextColor="Black" FontSize="15"></Label>
+                <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="45" Padding="10,0" WidthRequest="100">
+                    <Entry x:Name="email" TextColor="Black" Keyboard="Email" HeightRequest="30" FontSize="15" Margin="0" WidthRequest="50"></Entry>
+                </Frame>
+
+                <BoxView HeightRequest="20"></BoxView>
+
+                <Label Text="PASSWORD" TextColor="Black" FontSize="15"></Label>
+                <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="45" Padding="10,0" WidthRequest="100">
+                    <Entry x:Name="password" TextColor="Black" Keyboard="Email" HeightRequest="30" FontSize="15" Margin="0" WidthRequest="50" IsPassword="True"></Entry>
+                </Frame>
+
+                <BoxView HeightRequest="20"></BoxView>
+
+                <Label Text="THEME"  TextColor="Black" FontSize="15"></Label>
+
+                <CollectionView x:Name="colourList" HorizontalOptions="FillAndExpand" HeightRequest="150">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="5"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView Padding="5">
+                                <Frame WidthRequest="40"
+                                    HeightRequest="40"
+                                    CornerRadius="20"
+                                    Padding="0"
+                                    BackgroundColor="{Binding Colors.Primary}">
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ThemeColourTapGestureRecognizer_Tapped"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </ContentView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="Generate Random Theme Colour"  TextColor="Gray" HorizontalTextAlignment="Center" FontSize="15"></Label>
+
+                <Frame BorderColor="Gray" CornerRadius="100" Padding="0" HorizontalOptions="Center" VerticalOptions="Start" >
+                    <Grid ColumnSpacing="0" RowSpacing="0" WidthRequest="50" HeightRequest="60">
+                        <Label BackgroundColor="Gold"></Label>
+                        <Label BackgroundColor="BurlyWood" Grid.Column="1"></Label>
+                        <Label BackgroundColor="DarkOliveGreen" Grid.Row="1"></Label>
+                        <Label BackgroundColor="Orange" Grid.Row="1" Grid.Column="1"></Label>
+                    </Grid>
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="RandomThemeTapGestureRecognizer_Tapped"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <BoxView HeightRequest="20"></BoxView>
+
+
+                <Button Text="UPDATE" VerticalOptions="End" Padding="20" CornerRadius="20" Clicked="UpdateButton_Clicked"></Button>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

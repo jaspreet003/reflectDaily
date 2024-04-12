@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="reflectDaily.AccountManagement.RegisterPage"
+            NavigationPage.HasNavigationBar="False"
+             BackgroundImageSource="registerBackground.jpg">
+    
+    <ContentPage.Content>
+        
+        <StackLayout>
+            <Frame BackgroundColor="Black" Opacity="0.79" VerticalOptions="FillAndExpand">
+
+                <StackLayout VerticalOptions="FillAndExpand">
+
+                    <Button Text=" &lt; Back to Login" FontAttributes="Italic" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Start" Clicked="BacktoLoginButton_Clicked"></Button>
+
+                    <StackLayout VerticalOptions="FillAndExpand" Margin="20">
+                    <Image Source="logo.png" WidthRequest="300" HeightRequest="150"></Image>
+
+                    <Label Text="USERNAME" TextColor="White" FontAttributes="Bold" FontSize="15"></Label>
+                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="40" Padding="10">
+                            <Entry x:Name="username" TextColor="Black" HeightRequest="30" FontSize="15" Margin="0"></Entry>
+                    </Frame>
+
+                    <BoxView HeightRequest="20" />
+                    
+                    <Label Text="EMAIL" TextColor="White" FontAttributes="Bold" FontSize="15"></Label>
+                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="40" Padding="10">
+                            <Entry x:Name="email" TextColor="Black" Keyboard="Email" HeightRequest="30" FontSize="15" Margin="0"></Entry>
+                    </Frame>
+
+                    <BoxView HeightRequest="20" />
+
+                    <Label Text="PASSWORD" TextColor="White" FontAttributes="Bold" FontSize="15"></Label>
+                    <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="15" HeightRequest="40" Padding="10">
+                            <Entry x:Name="password" TextColor="Black" HeightRequest="30" FontSize="15" Margin="0"></Entry>
+                    </Frame>
+
+                    <BoxView HeightRequest="40" />
+
+                    <Button Text="REGISTER" TextColor="White" FontAttributes="Bold" FontSize="20" BackgroundColor="SaddleBrown" CornerRadius="15" HeightRequest="65" Clicked="RegisterButton_Clicked" ></Button>
+                    </StackLayout>
+
+                </StackLayout>
+
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
