@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,8 @@ namespace reflectDaily.Main.journal
 	{
 
         private Button PreviousOptionSelected;
+        private Button replacedBtn;
+
         private int questionPosition;
         List<JournalQuestion> questions;
 
@@ -133,14 +136,21 @@ namespace reflectDaily.Main.journal
 
             if (nextPosition < ((carouselQuestion.ItemsSource as IEnumerable<object>).Count() - 1) )
             {
-                carouselQuestion.Position = nextPosition;
-                questionPosition++;
 
                 nextButton.IsEnabled = false;
 
+
+                //minus 1 because nextPosition is already ++
                 var currentQuestion = questions[carouselQuestion.Position];
 
-                UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
+/*                await DisplayAlert("Question", currentQuestion.ToString(), "ok");
+*/              UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
+
+
+                carouselQuestion.Position = nextPosition;
+
+                questionPosition++;
+
 
             }
             else if(nextPosition < (carouselQuestion.ItemsSource as IEnumerable<object>).Count())
@@ -188,6 +198,7 @@ namespace reflectDaily.Main.journal
             }
 
             nextButton.IsEnabled = true;
+
         }
 
         private void OptionButton_Clicked(object sender, EventArgs e)
@@ -207,26 +218,104 @@ namespace reflectDaily.Main.journal
 
         }
 
-        private void UpdateOrCreateResponse(JournalQuestion currentQuestion, string selectedOption)
-        {
-            if (currentQuestion != null)
-            {
-                var currentQuestionPostion = Convert.ToInt32(currentQuestion.questionNumber) - 1;
+        /*  private void UpdateOrCreateResponse(JournalQuestion currentQuestion, string selectedOption)
+          {
+              if (currentQuestion != null)
+              {
+                  int currentQuestionPostionObject = Convert.ToInt32(currentQuestion.questionNumber);
+                  DisplayAlert("Save", currentQuestionPostionObject.ToString(), "OK");
 
 
-                if (responseList.Count > 0)
+                  if (responseList.Count > 0 && currentQuestionPostionObject >= 0)
+                  {
+
+                      var responseObject = responseList[0];
+
+                      DisplayAlert("Save", responseObject.ToString(), "OK");
+
+
+                      if (responseObject.QuestionId == currentQuestion.questionNumber)
+                      {
+                          responseObject.SelectedOption = selectedOption;
+                          responseObject.ResponseDate = DateTime.Now.Date;
+
+                          DisplayAlert("update", responseObject.ToString(), "OK");
+                      }
+                      else
+                      {
+                          // If not found, create a new response
+                          var newResponse = new PlayerResponse
+                          {
+                              UserId = App.loggedUserObj.Id,
+                              QuestionId = currentQuestion.questionNumber,
+                              SelectedOption = selectedOption,
+                              ResponseDate = DateTime.Now.Date
+                          };
+
+                          // Add the new response to the list
+                          responseList.Add(newResponse);
+                          DisplayAlert("Save", newResponse.ToString(), "OK");
+
+                      }
+
+                  }
+                  else
+                  {
+                      var newResponse = new PlayerResponse
+                      {
+                          UserId = App.loggedUserObj.Id,
+                          QuestionId = currentQuestion.questionNumber,
+                          SelectedOption = selectedOption,
+                          ResponseDate = DateTime.Now.Date
+                      };
+
+                      // Add the new response to the list
+                      responseList.Add(newResponse);
+                      DisplayAlert("Save First Time", newResponse.ToString(), "OK");  
+
+                  }
+
+
+              }
+          }*/
+
+        /*        private void UpdateOrCreateResponse(JournalQuestion currentQuestion, string selectedOption)
                 {
-                    foreach (var response in responseList)
+                    if (currentQuestion != null)
                     {
-                        if (Convert.ToString(currentQuestionPostion) == response.QuestionId)
+                        if (responseList.Count > 0)
                         {
-                            response.SelectedOption = selectedOption;
-                            response.ResponseDate = DateTime.Now.Date;
+                            foreach (var response in responseList)
+                            {
+                                if (response.QuestionId == currentQuestion.questionNumber)
+                                {
+                                    response.SelectedOption = selectedOption;
+                                    response.ResponseDate = DateTime.Now.Date;
+                                    DisplayAlert("update", response.ToString(), "OK");
+
+
+                                }
+                                else
+                                {
+                                    // If not found, create a new response
+                                    var newResponse = new PlayerResponse
+                                    {
+                                        UserId = App.loggedUserObj.Id,
+                                        QuestionId = currentQuestion.questionNumber,
+                                        SelectedOption = selectedOption,
+                                        ResponseDate = DateTime.Now.Date
+                                    };
+
+                                    // Add the new response to the list
+                                    responseList.Add(newResponse);
+                                    DisplayAlert("Save", newResponse.ToString(), "OK");
+
+                                }
+                            }
 
                         }
                         else
                         {
-                            // If not found, create a new response
                             var newResponse = new PlayerResponse
                             {
                                 UserId = App.loggedUserObj.Id,
@@ -237,13 +326,60 @@ namespace reflectDaily.Main.journal
 
                             // Add the new response to the list
                             responseList.Add(newResponse);
+                            DisplayAlert("Save First Time", newResponse.ToString(), "OK");
+
                         }
+
                     }
+                }*/
+
+        private void UpdateOrCreateResponse(JournalQuestion currentQuestion, string selectedOption)
+        {
+            if (responseList.Count > 0)
+            {
+                var response = responseList.FirstOrDefault(r => r.QuestionId == currentQuestion.questionNumber);
+
+                if (response != null)
+                {
+                    response.SelectedOption = selectedOption;
+                    response.ResponseDate = DateTime.Now.Date;
+                    DisplayAlert("update", response.ToString(), "OK");
 
                 }
+                else
+                {
+                    var newResponse = new PlayerResponse
+                    {
+                        UserId = App.loggedUserObj.Id,
+                        QuestionId = currentQuestion.questionNumber,
+                        SelectedOption = selectedOption,
+                        ResponseDate = DateTime.Now.Date
+                    };
+
+                    responseList.Add(newResponse);
+                    DisplayAlert("Save", newResponse.ToString(), "OK");
+
+                }
+            }
+            else
+            {
+                var newResponse = new PlayerResponse
+                {
+                    UserId = App.loggedUserObj.Id,
+                    QuestionId = currentQuestion.questionNumber,
+                    SelectedOption = selectedOption,
+                    ResponseDate = DateTime.Now.Date
+                };
+
+                responseList.Add(newResponse);
+                DisplayAlert("Save First Time", newResponse.ToString(), "OK");
 
             }
+
+
+
         }
+
         private async Task SaveResponsesToDatabase()
         {
             using (var conn = new SQLiteConnection(App.DatabaseLocation))
@@ -256,14 +392,39 @@ namespace reflectDaily.Main.journal
                     {
                         existingResponse.SelectedOption = response.SelectedOption;
                         conn.Update(existingResponse);
+                        DisplayAlert("Update", "ho gya", "ok");
                     }
                     else
                     {
                         conn.Insert(response);
+                        DisplayAlert("inserted", "ho gya", "ok");
+
                     }
                 }
             }
         }
+
+        /*private void SetPreviousResponse(PlayerResponse playerResponse)
+        {
+
+            if (playerResponse != null)
+            {
+
+                Button currentOptionSelected = new Button();
+                PreviousOptionSelected.BackgroundColor = (Color)Application.Current.Resources["secondary"];
+
+
+                currentOptionSelected.Text = playerResponse.SelectedOption;
+
+*/
+        /*                currentOptionSelected.Clicked += this.OptionButton_Clicked;
+*//*
+                PreviousOptionSelected = currentOptionSelected;
+                replacedBtn = currentOptionSelected as Button;
+            }
+
+
+        }*/
 
     }
 }

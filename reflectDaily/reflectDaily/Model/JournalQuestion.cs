@@ -11,7 +11,12 @@ namespace reflectDaily.Model
         public string questionDetail { get; set; }
         public List<string> options { get; set; }
 
+
+        public override string ToString()
+        {
+            return ": " + "ID : " + questionNumber + "\n" + "QUESTION Detail : " + questionDetail + "\n" + " OPTION : " + options[1];
+        }
+
     }
 
-    
 }

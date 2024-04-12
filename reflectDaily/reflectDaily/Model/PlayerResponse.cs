@@ -21,7 +21,7 @@ namespace reflectDaily.Model
 
         public override string ToString()
         {
-            return ": " + Id + " " + UserId+ " " + QuestionId + " " + SelectedOption + " " + ResponseDate;
+            return ": " + "ID : " + Id + "\n" + " USER ID : "  +  UserId + "\n" + "QUESTION ID : "  + QuestionId + "\n" + " OPTION : " + SelectedOption + "\n"  + "DATE : " + ResponseDate;
         }
 
     }
