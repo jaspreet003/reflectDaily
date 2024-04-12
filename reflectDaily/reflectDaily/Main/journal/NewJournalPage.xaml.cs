@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using reflectDaily.Model;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +20,13 @@ namespace reflectDaily.Main.journal
 	{
 
         private Button PreviousOptionSelected;
+        private Button replacedBtn;
+
         private int questionPosition;
-		public NewJournalPage ()
+        List<JournalQuestion> questions;
+
+        List<PlayerResponse> responseList = new List<PlayerResponse>();
+        public NewJournalPage ()
 		{
 			InitializeComponent ();
 
@@ -87,11 +94,20 @@ namespace reflectDaily.Main.journal
                 navigationPage.BarTextColor = Color.White;
             }
 
+            questionPosition = carouselQuestion.Position;
+
+            if (questionPosition == 0)
+            {
+                previousButton.IsEnabled = false;
+            }
+
+            nextButton.IsEnabled = false;
+
             /*            carouselQuestion.ItemsSource = questionList;
             */
 
             //disabling previous button for first question
-            
+
         }
 
         private void LoadQuestionsFromJson()
@@ -102,31 +118,39 @@ namespace reflectDaily.Main.journal
             using (var reader = new StreamReader(stream))
             {
                 var json = reader.ReadToEnd();
-                List<JournalQuestion> questions = JsonConvert.DeserializeObject<List<JournalQuestion>>(json);
+                questions = JsonConvert.DeserializeObject<List<JournalQuestion>>(json);
+
                 carouselQuestion.ItemsSource = questions;
             }
 
-            questionPosition = carouselQuestion.Position;
-            if (questionPosition == 0)
-            {
-                previousButton.IsEnabled = false;
-            }
         }
-
 
         private void carouselQuestion_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
         {
 
         }
 
-        private void NextButton_Clicked(object sender, EventArgs e)
+        private async void NextButton_Clicked(object sender, EventArgs e)
         {
             int nextPosition = carouselQuestion.Position + 1;
 
             if (nextPosition < ((carouselQuestion.ItemsSource as IEnumerable<object>).Count() - 1) )
             {
+
+                nextButton.IsEnabled = false;
+
+
+                //minus 1 because nextPosition is already ++
+                var currentQuestion = questions[carouselQuestion.Position];
+
+/*                await DisplayAlert("Question", currentQuestion.ToString(), "ok");
+*/              UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
+
+
                 carouselQuestion.Position = nextPosition;
+
                 questionPosition++;
+
 
             }
             else if(nextPosition < (carouselQuestion.ItemsSource as IEnumerable<object>).Count())
@@ -138,13 +162,17 @@ namespace reflectDaily.Main.journal
             }
             else
             {
-                Navigation.PushAsync(new SuccessPage());
+                await SaveResponsesToDatabase();
+                await Navigation.PushAsync(new SuccessPage());
             }
 
             if(questionPosition > 0)
             {
                 previousButton.IsEnabled = true;
             }
+
+
+          
         }
 
         private void PreviousButton_Clicked(object sender, EventArgs e)
@@ -168,6 +196,9 @@ namespace reflectDaily.Main.journal
                 previousButton.IsEnabled = true;
 
             }
+
+            nextButton.IsEnabled = true;
+
         }
 
         private void OptionButton_Clicked(object sender, EventArgs e)
@@ -183,6 +214,217 @@ namespace reflectDaily.Main.journal
             optionButton.BackgroundColor = (Color)Application.Current.Resources["secondary"];
             PreviousOptionSelected = optionButton;
 
+            nextButton.IsEnabled = true;
+
         }
+
+        /*  private void UpdateOrCreateResponse(JournalQuestion currentQuestion, string selectedOption)
+          {
+              if (currentQuestion != null)
+              {
+                  int currentQuestionPostionObject = Convert.ToInt32(currentQuestion.questionNumber);
+                  DisplayAlert("Save", currentQuestionPostionObject.ToString(), "OK");
+
+
+                  if (responseList.Count > 0 && currentQuestionPostionObject >= 0)
+                  {
+
+                      var responseObject = responseList[0];
+
+                      DisplayAlert("Save", responseObject.ToString(), "OK");
+
+
+                      if (responseObject.QuestionId == currentQuestion.questionNumber)
+                      {
+                          responseObject.SelectedOption = selectedOption;
+                          responseObject.ResponseDate = DateTime.Now.Date;
+
+                          DisplayAlert("update", responseObject.ToString(), "OK");
+                      }
+                      else
+                      {
+                          // If not found, create a new response
+                          var newResponse = new PlayerResponse
+                          {
+                              UserId = App.loggedUserObj.Id,
+                              QuestionId = currentQuestion.questionNumber,
+                              SelectedOption = selectedOption,
+                              ResponseDate = DateTime.Now.Date
+                          };
+
+                          // Add the new response to the list
+                          responseList.Add(newResponse);
+                          DisplayAlert("Save", newResponse.ToString(), "OK");
+
+                      }
+
+                  }
+                  else
+                  {
+                      var newResponse = new PlayerResponse
+                      {
+                          UserId = App.loggedUserObj.Id,
+                          QuestionId = currentQuestion.questionNumber,
+                          SelectedOption = selectedOption,
+                          ResponseDate = DateTime.Now.Date
+                      };
+
+                      // Add the new response to the list
+                      responseList.Add(newResponse);
+                      DisplayAlert("Save First Time", newResponse.ToString(), "OK");  
+
+                  }
+
+
+              }
+          }*/
+
+        /*        private void UpdateOrCreateResponse(JournalQuestion currentQuestion, string selectedOption)
+                {
+                    if (currentQuestion != null)
+                    {
+                        if (responseList.Count > 0)
+                        {
+                            foreach (var response in responseList)
+                            {
+                                if (response.QuestionId == currentQuestion.questionNumber)
+                                {
+                                    response.SelectedOption = selectedOption;
+                                    response.ResponseDate = DateTime.Now.Date;
+                                    DisplayAlert("update", response.ToString(), "OK");
+
+
+                                }
+                                else
+                                {
+                                    // If not found, create a new response
+                                    var newResponse = new PlayerResponse
+                                    {
+                                        UserId = App.loggedUserObj.Id,
+                                        QuestionId = currentQuestion.questionNumber,
+                                        SelectedOption = selectedOption,
+                                        ResponseDate = DateTime.Now.Date
+                                    };
+
+                                    // Add the new response to the list
+                                    responseList.Add(newResponse);
+                                    DisplayAlert("Save", newResponse.ToString(), "OK");
+
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            var newResponse = new PlayerResponse
+                            {
+                                UserId = App.loggedUserObj.Id,
+                                QuestionId = currentQuestion.questionNumber,
+                                SelectedOption = selectedOption,
+                                ResponseDate = DateTime.Now.Date
+                            };
+
+                            // Add the new response to the list
+                            responseList.Add(newResponse);
+                            DisplayAlert("Save First Time", newResponse.ToString(), "OK");
+
+                        }
+
+                    }
+                }*/
+
+        private void UpdateOrCreateResponse(JournalQuestion currentQuestion, string selectedOption)
+        {
+            if (responseList.Count > 0)
+            {
+                var response = responseList.FirstOrDefault(r => r.QuestionId == currentQuestion.questionNumber);
+
+                if (response != null)
+                {
+                    response.SelectedOption = selectedOption;
+                    response.ResponseDate = DateTime.Now.Date;
+                    DisplayAlert("update", response.ToString(), "OK");
+
+                }
+                else
+                {
+                    var newResponse = new PlayerResponse
+                    {
+                        UserId = App.loggedUserObj.Id,
+                        QuestionId = currentQuestion.questionNumber,
+                        SelectedOption = selectedOption,
+                        ResponseDate = DateTime.Now.Date
+                    };
+
+                    responseList.Add(newResponse);
+                    DisplayAlert("Save", newResponse.ToString(), "OK");
+
+                }
+            }
+            else
+            {
+                var newResponse = new PlayerResponse
+                {
+                    UserId = App.loggedUserObj.Id,
+                    QuestionId = currentQuestion.questionNumber,
+                    SelectedOption = selectedOption,
+                    ResponseDate = DateTime.Now.Date
+                };
+
+                responseList.Add(newResponse);
+                DisplayAlert("Save First Time", newResponse.ToString(), "OK");
+
+            }
+
+
+
+        }
+
+        private async Task SaveResponsesToDatabase()
+        {
+            using (var conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                conn.CreateTable<PlayerResponse>();
+                foreach (var response in responseList)
+                {
+                    var existingResponse = conn.Table<PlayerResponse>().FirstOrDefault(r => r.QuestionId == response.QuestionId && r.UserId == response.UserId && r.ResponseDate == response.ResponseDate);
+                    if (existingResponse != null)
+                    {
+                        existingResponse.SelectedOption = response.SelectedOption;
+                        conn.Update(existingResponse);
+                        DisplayAlert("Update", "ho gya", "ok");
+                    }
+                    else
+                    {
+                        conn.Insert(response);
+                        DisplayAlert("inserted", "ho gya", "ok");
+
+                    }
+                }
+            }
+        }
+
+        /*private void SetPreviousResponse(PlayerResponse playerResponse)
+        {
+
+            if (playerResponse != null)
+            {
+
+                Button currentOptionSelected = new Button();
+                PreviousOptionSelected.BackgroundColor = (Color)Application.Current.Resources["secondary"];
+
+
+                currentOptionSelected.Text = playerResponse.SelectedOption;
+
+*/
+        /*                currentOptionSelected.Clicked += this.OptionButton_Clicked;
+*//*
+                PreviousOptionSelected = currentOptionSelected;
+                replacedBtn = currentOptionSelected as Button;
+            }
+
+
+        }*/
+
     }
 }
