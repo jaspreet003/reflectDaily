@@ -1,4 +1,5 @@
-﻿using System;
+﻿using reflectDaily.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,26 @@ namespace reflectDaily.Main.journal
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class JournalResultPage : ContentPage
 	{
-		public JournalResultPage ()
+        private DateTime dateSelected;
+        List<PlayerResponse> playerResponseList;
+
+        public JournalResultPage (DateTime selectedDate, List<PlayerResponse> response)
 		{
 			InitializeComponent ();
-		}
+            dateSelected = selectedDate;
+            playerResponseList = response;
+
+            this.BindingContext = this;
+        
+
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+
+        }
 
         private void AnotherDateButton_Clicked(object sender, EventArgs e)
         {
@@ -26,5 +43,7 @@ namespace reflectDaily.Main.journal
         {
             Navigation.PushAsync(new HomePage());
         }
+
+
     }
 }

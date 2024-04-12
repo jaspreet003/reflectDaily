@@ -130,7 +130,7 @@ namespace reflectDaily.Main.journal
 
         }
 
-        private async void NextButton_Clicked(object sender, EventArgs e)
+        private  async void NextButton_Clicked(object sender, EventArgs e)
         {
             int nextPosition = carouselQuestion.Position + 1;
 
@@ -142,9 +142,7 @@ namespace reflectDaily.Main.journal
 
                 //minus 1 because nextPosition is already ++
                 var currentQuestion = questions[carouselQuestion.Position];
-
-/*                await DisplayAlert("Question", currentQuestion.ToString(), "ok");
-*/              UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
+             UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
 
 
                 carouselQuestion.Position = nextPosition;
@@ -163,7 +161,7 @@ namespace reflectDaily.Main.journal
             else
             {
                 await SaveResponsesToDatabase();
-                await Navigation.PushAsync(new SuccessPage());
+                 await Navigation.PushAsync(new SuccessPage());
             }
 
             if(questionPosition > 0)
@@ -343,7 +341,6 @@ namespace reflectDaily.Main.journal
                 {
                     response.SelectedOption = selectedOption;
                     response.ResponseDate = DateTime.Now.Date;
-                    DisplayAlert("update", response.ToString(), "OK");
 
                 }
                 else
@@ -357,7 +354,6 @@ namespace reflectDaily.Main.journal
                     };
 
                     responseList.Add(newResponse);
-                    DisplayAlert("Save", newResponse.ToString(), "OK");
 
                 }
             }
@@ -372,7 +368,6 @@ namespace reflectDaily.Main.journal
                 };
 
                 responseList.Add(newResponse);
-                DisplayAlert("Save First Time", newResponse.ToString(), "OK");
 
             }
 
@@ -392,12 +387,10 @@ namespace reflectDaily.Main.journal
                     {
                         existingResponse.SelectedOption = response.SelectedOption;
                         conn.Update(existingResponse);
-                        DisplayAlert("Update", "ho gya", "ok");
                     }
                     else
                     {
                         conn.Insert(response);
-                        DisplayAlert("inserted", "ho gya", "ok");
 
                     }
                 }

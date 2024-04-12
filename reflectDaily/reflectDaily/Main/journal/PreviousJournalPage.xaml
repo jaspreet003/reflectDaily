@@ -11,7 +11,8 @@
                    FontSize="Medium"/>
 
             <syncfusion:SfCalendar x:Name="calendar"
-                                   SelectionMode="SingleSelection">
+                                   SelectionMode="SingleSelection"
+                                   SelectionChanged="calendar_SelectionChanged">
             </syncfusion:SfCalendar>
 
             <Button Text="See Result" Padding="20" CornerRadius="15" BackgroundColor="{DynamicResource primary}" TextColor="White" FontSize="17" FontAttributes="Bold" Clicked="ResultButton_Clicked"></Button>

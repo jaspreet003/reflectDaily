@@ -14,30 +14,33 @@
                 <StackLayout Spacing="30" Padding="10, 20">
                     <Label Text="SUMMARY" TextColor="{DynamicResource base}" FontSize="20" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
 
-                    <StackLayout VerticalOptions="FillAndExpand" Spacing="10" Padding="10">
-                        <Label Text="Question - 1" HorizontalOptions="Start" FontSize="16" TextColor="{DynamicResource base}" FontAttributes="Bold"></Label>
-                        <Label Text="Question Details" HorizontalOptions="StartAndExpand" FontSize="Medium" TextColor="{DynamicResource base}"></Label>
-                        <Frame BackgroundColor="{DynamicResource secondary}" Opacity="0.6" Padding="0" Margin="0" CornerRadius="10">
-                            <Label Text="Answer" FontSize="16" TextColor="{DynamicResource neutral}"  HorizontalOptions="FillAndExpand" Padding="10"></Label>
-                        </Frame>
-                    </StackLayout>
+                    <!--<StackLayout VerticalOptions="FillAndExpand" Spacing="10" Padding="10">
+                            <Label Text="Question - 1" HorizontalOptions="Start" FontSize="16" TextColor="{DynamicResource base}" FontAttributes="Bold"></Label>
+                            <Label Text="Question Details" HorizontalOptions="StartAndExpand" FontSize="Medium" TextColor="{DynamicResource base}"></Label>
+                            <Frame BackgroundColor="{DynamicResource secondary}" Opacity="0.6" Padding="0" Margin="0" CornerRadius="10">
+                                <Label Text="Answer" FontSize="16" TextColor="{DynamicResource neutral}"  HorizontalOptions="FillAndExpand" Padding="10"></Label>
+                            </Frame>
+                    </StackLayout>-->
+                    
 
 
-                    <!--<ScrollView VerticalOptions="FillAndExpand" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalScrollBarVisibility="Always">
-                        <StackLayout Spacing="20">
+                    <ScrollView VerticalOptions="FillAndExpand" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalScrollBarVisibility="Always">
+                        <StackLayout Spacing="20" BindableLayout.ItemsSource="{Binding responses}">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout>
-                                        <Label Text="Question - 1" HorizontalOptions="Start"></Label>
-                                        <Label Text=" Question Details" HorizontalOptions="StartAndExpand"></Label>
-                                        <Label Text=" Answer" HorizontalOptions="StartAndExpand"></Label>
+                                    <StackLayout VerticalOptions="FillAndExpand" Spacing="10" Padding="10" >
+                                        <Label Text="{Binding QuestionId}" HorizontalOptions="Start" FontSize="16" TextColor="{DynamicResource base}" FontAttributes="Bold"></Label>
+                                        <Label Text="Question Details" HorizontalOptions="StartAndExpand" FontSize="Medium" TextColor="{DynamicResource base}"></Label>
+                                        <Frame BackgroundColor="{DynamicResource secondary}" Opacity="0.6" Padding="0" Margin="0" CornerRadius="10">
+                                            <Label Text="{Binding SelectedOption}" FontSize="16" TextColor="{DynamicResource neutral}"  HorizontalOptions="FillAndExpand" Padding="10"></Label>
+                                        </Frame>
                                     </StackLayout>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
 
-                    </ScrollView>-->
-                                       
+                    </ScrollView>
+
                     <Button Text="BACK TO HOME" BackgroundColor="{DynamicResource accent}"  CornerRadius="15" Margin="20" Padding="10" VerticalOptions="End" Clicked="GotoHomeButton_Clicked"></Button>
                 </StackLayout>
             </Frame>
