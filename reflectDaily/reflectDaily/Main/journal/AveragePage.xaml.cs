@@ -16,7 +16,8 @@ namespace reflectDaily.Main.journal
         Dictionary<string, List<string>> responseDictionary;
         List<PlayerResponse> responseList = new List<PlayerResponse>();
         int userId = 0;
-
+        private DateTime startDate;
+        private DateTime endDate;
 
         public AveragePage()
         {
@@ -27,14 +28,47 @@ namespace reflectDaily.Main.journal
 
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
         private void StartDateButton_Clicked(object sender, EventArgs e)
         {
-            calendar.IsVisible = true;
+            calendarEndDate.IsVisible = false;
+
+            calendarStartDate.IsVisible = true;
+
+            if (endDateButton.Text != "")
+            {
+                if (DateTime.TryParse(endDateButton.Text, out DateTime endDate))
+                {
+                    calendarStartDate.MaxDate = endDate; // Set the max date to restrict the calendar selection.
+
+                }
+
+            }
+            
+            
         }
 
         private void EndDateButton_Clicked(object sender, EventArgs e)
         {
-            calendar.IsVisible = true;
+            calendarStartDate.IsVisible = false;
+
+            calendarEndDate.IsVisible = true;
+
+            if (startDateButton.Text == "")
+            {
+                if (DateTime.TryParse(endDateButton.Text, out DateTime endDate))
+                {
+                    calendarEndDate.MaxDate = endDate; // Set the max date to restrict the calendar selection.
+
+                }
+
+            }
+
+
         }
 
         private void CheckButton_Clicked(object sender, EventArgs e)
@@ -151,5 +185,28 @@ namespace reflectDaily.Main.journal
             return finalAnswerString;
         }
 
+
+        private void calendarEndDate_SelectionChanged(object sender, Syncfusion.SfCalendar.XForms.SelectionChangedEventArgs e)
+        {
+            if (e.DateAdded != null && e.DateAdded.Count > 0)
+            {
+                endDate = e.DateAdded[0];
+                endDateButton.Text = startDate.ToString("dd/MM/yyyy");
+            }
+
+            calendarEndDate.IsVisible = false;
+        }
+
+        private void calendarStartDate_SelectionChanged(object sender, Syncfusion.SfCalendar.XForms.SelectionChangedEventArgs e)
+        {
+            if (e.DateAdded != null && e.DateAdded.Count > 0)
+            {
+                startDate = e.DateAdded[0];
+                startDateButton.Text = endDate.ToString("dd/MM/yyyy");
+
+            }
+
+            calendarStartDate.IsVisible = false;    
+        }
     }
 }

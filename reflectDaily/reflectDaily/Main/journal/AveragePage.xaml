@@ -31,16 +31,20 @@
                 <StackLayout Orientation="Horizontal" Spacing="20">
                     <StackLayout HorizontalOptions="FillAndExpand">
                         <Label Text="Start Date" TextColor="{DynamicResource neutral}"></Label>
-                        <Button Text="" Margin="0" Clicked="StartDateButton_Clicked" TextColor="Black"></Button>
+                        <Button x:Name="startDateButton" Text="" Margin="0" Clicked="StartDateButton_Clicked" TextColor="Black"></Button>
                     </StackLayout>
                     <StackLayout HorizontalOptions="FillAndExpand">
                         <Label Text="End Date" TextColor="{DynamicResource neutral}"></Label>
-                        <Button Text="" Margin="0" Clicked="EndDateButton_Clicked" TextColor="Black"></Button>
+                        <Button x:Name="endDateButton" Text="" Margin="0" Clicked="EndDateButton_Clicked" TextColor="Black"></Button>
                     </StackLayout>
                 </StackLayout>
 
-                <syncfusion:SfCalendar x:Name="calendar"
-                                   SelectionMode="SingleSelection" IsVisible="false">
+                <syncfusion:SfCalendar x:Name="calendarStartDate"
+                                   SelectionMode="SingleSelection" IsVisible="false" SelectionChanged="calendarStartDate_SelectionChanged">
+                </syncfusion:SfCalendar>
+                    
+                    <syncfusion:SfCalendar x:Name="calendarEndDate"
+                                   SelectionMode="SingleSelection" IsVisible="false" SelectionChanged="calendarEndDate_SelectionChanged">
                 </syncfusion:SfCalendar>
 
                 <Button Text="CHECK" Padding="15" BackgroundColor="{DynamicResource primary}" TextColor="{DynamicResource base}" FontAttributes="Bold" CornerRadius="10" Clicked="CheckButton_Clicked"></Button>
