@@ -14,6 +14,9 @@ namespace reflectDaily.Main.journal
     public partial class AveragePage : ContentPage
     {
         Dictionary<string, List<string>> responseDictionary;
+        List<PlayerResponse> responseList = new List<PlayerResponse>();
+        int userId = 0;
+
 
         public AveragePage()
         {
@@ -23,7 +26,7 @@ namespace reflectDaily.Main.journal
             DateTime endDate = DateTime.Now.Date;
             DateTime startTime = endDate.AddDays(-2);
 
-            var userId = App.loggedUserObj.Id;
+            userId = App.loggedUserObj.Id;
 
             ProcessResponses(startTime, endDate, userId);
         }
@@ -40,7 +43,7 @@ namespace reflectDaily.Main.journal
 
         private void CheckButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new AverageResultPage());
+            Navigation.PushAsync(new AverageResultPage(responseList));
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -48,47 +51,109 @@ namespace reflectDaily.Main.journal
             Navigation.PopAsync();
         }
 
-        private void LastWeekAvgButton_Clicked(object sender, EventArgs e)
+        private  void LastWeekAvgButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new AverageResultPage());
+            var endDate = DateTime.Now.Date;
+            var startDate = endDate.AddDays(-7);
+            ProcessResponses(startDate, endDate, userId);
+
+            if(responseList.Count > 0)
+            {
+                Navigation.PushAsync(new AverageResultPage(responseList));
+            }
+            else
+            {
+                DisplayAlert("NO RESULT FOUND", "There are no submitted response since last 7 days", "OK");
+            }
         }
 
         private void LastMonthButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new AverageResultPage());
+            var endDate = DateTime.Now.Date;
+            var startDate = endDate.AddDays(-30);
+            ProcessResponses(startDate, endDate, userId);
+
+            if (responseList.Count > 0)
+            {
+                Navigation.PushAsync(new AverageResultPage(responseList));
+            }
+            else
+            {
+                DisplayAlert("NO RESULT FOUND", "There are no submitted response since last 7 days", "OK");
+            }
         }
 
         public void ProcessResponses(DateTime startDate, DateTime endDate, int userId)
         {
+
             var responses = App.databaseManager.GetResponsesByDate(startDate, endDate, userId);
             foreach (var response in responses)
             {
                 UpdateResponseDictionary(response);
             }
+
+            foreach (var response in responseDictionary)
+            {
+                var questionId = response.Key;
+
+                var list = response.Value.ToList();
+                var answerString = CheckFrequency(list);
+
+                resultResponse(questionId, answerString);
+            }
+
         }
 
         public void UpdateResponseDictionary(PlayerResponse currentResponse)
         {
-                    var currentQuestionId = currentResponse.QuestionId;
+             var currentQuestionId = currentResponse.QuestionId;
 
-                    if (responseDictionary.ContainsKey(currentQuestionId))
-                    {
-                    responseDictionary[currentQuestionId].Add(currentResponse.SelectedOption);
+             if (responseDictionary.ContainsKey(currentQuestionId))
+             {
+                 responseDictionary[currentQuestionId].Add(currentResponse.SelectedOption);
 
-                    Console.WriteLine(currentResponse.ToString());
-
-                    Console.WriteLine("here goes existing item: ", responseDictionary.Count());
-
-                    }
-                    else
-                    {
-                    responseDictionary.Add(currentQuestionId, new List<string> { currentResponse.SelectedOption });
-                    DisplayAlert("YOUR RESPONSES: ", currentResponse.ToString(), "OK");
-
-                    Console.WriteLine(currentResponse.ToString());
-
-            }
+             }
+             else
+             {
+                 responseDictionary.Add(currentQuestionId, new List<string> { currentResponse.SelectedOption });
+             }
+            
+            
         }
-       
+
+        public void resultResponse(string questionId, string answerString)
+        {
+            PlayerResponse playerResponse = new PlayerResponse();
+
+            playerResponse.QuestionId = questionId;
+            playerResponse.ResponseDate = DateTime.Now;
+            playerResponse.SelectedOption = answerString;
+            playerResponse.QuestionDetail = App.databaseManager.GetQuestionDetail(questionId);
+            playerResponse.UserId = userId;
+
+            
+            responseList.Add(playerResponse);
+        }
+
+        public string CheckFrequency(List<string> answerList)
+        {
+            // Count the frequency of each answer
+            var frequency = answerList.GroupBy(x => x)
+                                      .ToDictionary(x => x.Key, x => x.Count());
+
+            // Find the maximum frequency
+            int maxFrequency = frequency.Values.Max();
+
+            // Collect all items that have the maximum frequency
+            var mostFrequent = frequency.Where(x => x.Value == maxFrequency)
+                                        .Select(x => x.Key)
+                                        .ToList();
+
+            // Join the most frequent items into a single string, separated by commas
+            string finalAnswerString = string.Join(", ", mostFrequent);
+
+            return finalAnswerString;
+        }
+
     }
 }

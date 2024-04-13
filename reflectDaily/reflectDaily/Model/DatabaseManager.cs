@@ -40,7 +40,6 @@ namespace reflectDaily.Model
                 response.QuestionDetail = GetQuestionDetail(response.QuestionId);
 
             }
-            Console.WriteLine(responses[3].QuestionDetail);
             return responses;
 
         }
