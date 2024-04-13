@@ -28,8 +28,8 @@ namespace reflectDaily.Main.journal
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            playerResponseList.ItemsSource = responseList;
             
+            playerResponseList.ItemsSource = responseList;
         }
 
         private void AnotherDateButton_Clicked(object sender, EventArgs e)
