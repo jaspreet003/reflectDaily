@@ -16,8 +16,8 @@ namespace reflectDaily.Main.journal
         Dictionary<string, List<string>> responseDictionary;
         List<PlayerResponse> responseList = new List<PlayerResponse>();
         int userId = 0;
-        private DateTime startDate;
-        private DateTime endDate;
+        DateTime startDate;
+        DateTime endDate;
 
         public AveragePage()
         {
@@ -35,38 +35,16 @@ namespace reflectDaily.Main.journal
 
         private void StartDateButton_Clicked(object sender, EventArgs e)
         {
+            calendarStartDate.IsVisible = true;
             calendarEndDate.IsVisible = false;
 
-            calendarStartDate.IsVisible = true;
 
-            if (endDateButton.Text != "")
-            {
-                if (DateTime.TryParse(endDateButton.Text, out DateTime endDate))
-                {
-                    calendarStartDate.MaxDate = endDate; // Set the max date to restrict the calendar selection.
-
-                }
-
-            }
-            
-            
         }
 
         private void EndDateButton_Clicked(object sender, EventArgs e)
         {
             calendarStartDate.IsVisible = false;
-
             calendarEndDate.IsVisible = true;
-
-            if (startDateButton.Text == "")
-            {
-                if (DateTime.TryParse(endDateButton.Text, out DateTime endDate))
-                {
-                    calendarEndDate.MaxDate = endDate; // Set the max date to restrict the calendar selection.
-
-                }
-
-            }
 
 
         }
@@ -81,13 +59,13 @@ namespace reflectDaily.Main.journal
             Navigation.PopAsync();
         }
 
-        private  void LastWeekAvgButton_Clicked(object sender, EventArgs e)
+        private void LastWeekAvgButton_Clicked(object sender, EventArgs e)
         {
             var endDate = DateTime.Now.Date;
             var startDate = endDate.AddDays(-7);
             ProcessResponses(startDate, endDate, userId);
 
-            if(responseList.Count > 0)
+            if (responseList.Count > 0)
             {
                 Navigation.PushAsync(new AverageResultPage(responseList));
             }
@@ -136,19 +114,19 @@ namespace reflectDaily.Main.journal
 
         public void UpdateResponseDictionary(PlayerResponse currentResponse)
         {
-             var currentQuestionId = currentResponse.QuestionId;
+            var currentQuestionId = currentResponse.QuestionId;
 
-             if (responseDictionary.ContainsKey(currentQuestionId))
-             {
-                 responseDictionary[currentQuestionId].Add(currentResponse.SelectedOption);
+            if (responseDictionary.ContainsKey(currentQuestionId))
+            {
+                responseDictionary[currentQuestionId].Add(currentResponse.SelectedOption);
 
-             }
-             else
-             {
-                 responseDictionary.Add(currentQuestionId, new List<string> { currentResponse.SelectedOption });
-             }
-            
-            
+            }
+            else
+            {
+                responseDictionary.Add(currentQuestionId, new List<string> { currentResponse.SelectedOption });
+            }
+
+
         }
 
         public void resultResponse(string questionId, string answerString)
@@ -161,7 +139,7 @@ namespace reflectDaily.Main.journal
             playerResponse.QuestionDetail = App.databaseManager.GetQuestionDetail(questionId);
             playerResponse.UserId = userId;
 
-            
+
             responseList.Add(playerResponse);
         }
 
@@ -191,10 +169,9 @@ namespace reflectDaily.Main.journal
             if (e.DateAdded != null && e.DateAdded.Count > 0)
             {
                 endDate = e.DateAdded[0];
-                endDateButton.Text = startDate.ToString("dd/MM/yyyy");
+                endDateButton.Text = endDate.ToString("dd/MM/yyyy");
+                calendarEndDate.IsVisible = false;  // Hide calendar after selection
             }
-
-            calendarEndDate.IsVisible = false;
         }
 
         private void calendarStartDate_SelectionChanged(object sender, Syncfusion.SfCalendar.XForms.SelectionChangedEventArgs e)
@@ -202,11 +179,19 @@ namespace reflectDaily.Main.journal
             if (e.DateAdded != null && e.DateAdded.Count > 0)
             {
                 startDate = e.DateAdded[0];
-                startDateButton.Text = endDate.ToString("dd/MM/yyyy");
+                startDateButton.Text = startDate.ToString("dd/MM/yyyy");
+                calendarStartDate.IsVisible = false;  // Hide calendar after selection
 
+                // If endDate is before startDate, reset endDate
+                if (endDate < startDate)
+                {
+                    endDate = default;
+                    endDateButton.Text = "";
+                }
+
+                // Optionally, set the minimum date for the endDatePicker
+                calendarEndDate.MinDate = startDate;
             }
-
-            calendarStartDate.IsVisible = false;    
         }
     }
 }
