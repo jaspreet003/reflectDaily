@@ -28,15 +28,16 @@ namespace reflectDaily.Model
         }
 
         public List<PlayerResponse> AddQuestionDetailToPlayerResponses(List<PlayerResponse> responses)
-        {
 
+
+        {
             foreach (PlayerResponse response in responses)
             {
 
                 response.QuestionDetail = GetQuestionDetail(response.QuestionId);
 
             }
-
+            Console.WriteLine(responses[3].QuestionDetail);
             return responses;
 
         }
@@ -44,7 +45,7 @@ namespace reflectDaily.Model
         {
             var question = db.Table<JournalQuestion>()
                              .Where(r => r.questionNumber == questionId)
-                             .FirstOrDefault();
+                             .First();
 
             return question?.questionDetail; 
         }
@@ -60,8 +61,6 @@ namespace reflectDaily.Model
                     {
                         int row = con.Insert(question);
 
-                        con.Close();
-
                     }catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
@@ -69,8 +68,9 @@ namespace reflectDaily.Model
 
 
                 }
+                con.Close();
 
-                
+
             }
         }
 

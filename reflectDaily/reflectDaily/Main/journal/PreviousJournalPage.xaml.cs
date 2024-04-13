@@ -40,7 +40,7 @@ namespace reflectDaily.Main.journal
             List<PlayerResponse> responses = App.databaseManager.GetResponsesByDate(selectedDate, userId);
             if(responses != null)
             {
-                App.databaseManager.AddQuestionDetailToPlayerResponses(responses);
+                responses = App.databaseManager.AddQuestionDetailToPlayerResponses(responses);
             }
             else
             {

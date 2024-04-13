@@ -29,11 +29,11 @@
                                     <ViewCell>
                                         <!-- Template for displaying each PlayerResponse -->
                                         <StackLayout Spacing="10" Padding="10">
-                                       <!--     <Label Text="{Binding QuestionId}" HorizontalOptions="Start" FontSize="16" TextColor="{DynamicResource base}" FontAttributes="Bold" /> -->
-                                        <!--    <Label Text="{Binding QuestionDetail}" HorizontalOptions="StartAndExpand" FontSize="Medium" TextColor="{DynamicResource base}" /> -->
-                                            <Frame BackgroundColor="{DynamicResource secondary}" Opacity="0.6" Padding="0" Margin="0" CornerRadius="10">
+                                        <Label Text="{Binding QuestionId}" HorizontalOptions="Start" FontSize="16" TextColor="{DynamicResource base}" FontAttributes="Bold" /> 
+                                         <Label Text="{Binding QuestionDetail}" HorizontalOptions="StartAndExpand" FontSize="Medium" TextColor="{DynamicResource base}" /> 
+                                         <Frame BackgroundColor="{DynamicResource secondary}" Opacity="0.6" Padding="0" Margin="0" CornerRadius="10">
                                             <Label Text="{Binding SelectedOption}" FontSize="16" TextColor="{DynamicResource neutral}" HorizontalOptions="FillAndExpand" Padding="10" />
-                                            </Frame>
+                                         </Frame>
                                         </StackLayout>
                                     </ViewCell>
                                 </DataTemplate>

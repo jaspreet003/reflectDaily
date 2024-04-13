@@ -23,7 +23,6 @@ namespace reflectDaily.Main.journal
         private Button replacedBtn;
 
         private int questionPosition;
-        List<JournalQuestion> questions;
 
         List<PlayerResponse> responseList = new List<PlayerResponse>();
         public NewJournalPage ()
@@ -43,9 +42,9 @@ namespace reflectDaily.Main.journal
             titleView.Margin = new Thickness(30, 0, 30, 0);
             NavigationPage.SetTitleView(this, titleView);
 
-            LoadQuestionsFromJson();
+            carouselQuestion.ItemsSource = App.questions;
 
-            
+
 
 
         }
@@ -110,22 +109,6 @@ namespace reflectDaily.Main.journal
 
         }
 
-        private void LoadQuestionsFromJson()
-        {
-            var assembly = typeof(NewJournalPage).GetTypeInfo().Assembly;
-            Stream stream = assembly.GetManifestResourceStream("reflectDaily.questions.json");
-
-            using (var reader = new StreamReader(stream))
-            {
-                var json = reader.ReadToEnd();
-                questions = JsonConvert.DeserializeObject<List<JournalQuestion>>(json);
-
-                App.databaseManager.SaveQuestions(questions);
-
-                carouselQuestion.ItemsSource = questions;
-            }
-
-        }
 
         private void carouselQuestion_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
         {
@@ -143,7 +126,7 @@ namespace reflectDaily.Main.journal
 
 
                 //minus 1 because nextPosition is already ++
-                var currentQuestion = questions[carouselQuestion.Position];
+                var currentQuestion = App.questions[carouselQuestion.Position];
                 UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
 
 

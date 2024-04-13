@@ -22,7 +22,7 @@ namespace reflectDaily.Main.journal
             dateSelected = selectedDate;
             responseList = response;
 
-            DisplayAlert("haha", response[0].ToString (),"ok");
+            DisplayAlert("haha", response[2].ToString (),"ok");
         }
 
         protected override void OnAppearing()
