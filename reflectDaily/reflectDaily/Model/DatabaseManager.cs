@@ -1,6 +1,7 @@
 ﻿using reflectDaily.Main.journal;
 using SQLite;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,15 +21,43 @@ namespace reflectDaily.Model
 
         public List<PlayerResponse> GetResponsesByDate(DateTime strDate, DateTime endDate, int userId)
         {
+            Console.WriteLine($"Initial Dates: {strDate.ToString()} , {endDate.ToString()} ");
             var startDate = strDate.Date; // Midnight at the start of the day
-            //enddate Midnight at the start of the next day
+            var nextDayEndDate = endDate.Date; // Midnight at the start of the next day
 
-            return db.Table<PlayerResponse>()
-                     .Where(r => r.ResponseDate >= startDate && r.ResponseDate < endDate && r.UserId == userId)
-                     .ToList();
+            // If the start and end dates are the same, adjust the end date to be inclusive
+            if (startDate == nextDayEndDate)
+            {
+                nextDayEndDate = nextDayEndDate.AddDays(1);
+                Console.WriteLine($"Same Dates: {startDate.ToString()} , {nextDayEndDate.ToString()} ");
+                var list1 = db.Table<PlayerResponse>()
+                           .Where(r => r.ResponseDate >= startDate && r.ResponseDate < nextDayEndDate && r.UserId == userId).ToList();
+                foreach (var item in list1)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+
+                return list1;
+            }
+            else
+            {
+                Console.WriteLine($"Different Dates: {startDate.ToString()} , {nextDayEndDate.ToString()} ");
+
+                var list2 =  db.Table<PlayerResponse>()
+                           .Where(r => r.ResponseDate >= startDate && r.ResponseDate <= nextDayEndDate && r.UserId == userId).ToList();
+
+                foreach (var item in list2)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+
+                return list2;
+            }
+
+           
         }
 
-       
+
 
         public List<PlayerResponse> AddQuestionDetailToPlayerResponses(List<PlayerResponse> responses)
 

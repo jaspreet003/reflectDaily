@@ -51,7 +51,16 @@ namespace reflectDaily.Main.journal
 
         private void CheckButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new AverageResultPage(responseList));
+            if(startDate != null || endDate != null)
+            {
+                ProcessResponses(startDate, endDate, userId);
+                Navigation.PushAsync(new AverageResultPage(responseList));
+
+            }
+            else
+            {
+                DisplayAlert("INVALID DDATE FIELD", "The range of date is not selected. Please select both dates.", "OK");
+            }
         }
 
         private void Button_Clicked(object sender, EventArgs e)
