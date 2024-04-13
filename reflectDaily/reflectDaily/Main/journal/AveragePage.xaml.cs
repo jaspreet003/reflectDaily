@@ -23,12 +23,8 @@ namespace reflectDaily.Main.journal
             InitializeComponent();
             responseDictionary = new Dictionary<string, List<string>>();
 
-            DateTime endDate = DateTime.Now.Date;
-            DateTime startTime = endDate.AddDays(-2);
-
             userId = App.loggedUserObj.Id;
 
-            ProcessResponses(startTime, endDate, userId);
         }
 
         private void StartDateButton_Clicked(object sender, EventArgs e)
