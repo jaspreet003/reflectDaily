@@ -14,24 +14,22 @@ namespace reflectDaily.Main.journal
 	public partial class JournalResultPage : ContentPage
 	{
         private DateTime dateSelected;
-        List<PlayerResponse> playerResponseList;
+        private List<PlayerResponse> responseList;
 
         public JournalResultPage (DateTime selectedDate, List<PlayerResponse> response)
 		{
 			InitializeComponent ();
             dateSelected = selectedDate;
-            playerResponseList = response;
+            responseList = response;
 
-            this.BindingContext = this;
-        
-
+            DisplayAlert("haha", response[0].ToString (),"ok");
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-
+            playerResponseList.ItemsSource = responseList;
+            
         }
 
         private void AnotherDateButton_Clicked(object sender, EventArgs e)

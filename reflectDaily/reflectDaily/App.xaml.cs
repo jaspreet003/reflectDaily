@@ -11,6 +11,7 @@ namespace reflectDaily
     {
         public static string DatabaseLocation = string.Empty;
         public static User loggedUserObj = null;
+        public static DatabaseManager databaseManager = null;
         public App()
         {
             InitializeComponent();
@@ -24,6 +25,9 @@ namespace reflectDaily
             InitializeComponent();
             MainPage = new NavigationPage(new LoginPage());
             DatabaseLocation = databaseLocation;
+
+            databaseManager = new DatabaseManager(databaseLocation);
+
         }
 
         protected override void OnStart()

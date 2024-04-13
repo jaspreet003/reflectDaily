@@ -120,6 +120,8 @@ namespace reflectDaily.Main.journal
                 var json = reader.ReadToEnd();
                 questions = JsonConvert.DeserializeObject<List<JournalQuestion>>(json);
 
+                App.databaseManager.SaveQuestions(questions);
+
                 carouselQuestion.ItemsSource = questions;
             }
 
@@ -142,7 +144,7 @@ namespace reflectDaily.Main.journal
 
                 //minus 1 because nextPosition is already ++
                 var currentQuestion = questions[carouselQuestion.Position];
-             UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
+                UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
 
 
                 carouselQuestion.Position = nextPosition;
@@ -160,7 +162,7 @@ namespace reflectDaily.Main.journal
             }
             else
             {
-                await SaveResponsesToDatabase();
+                await App.databaseManager.SaveResponsesToDatabase(responseList);
                  await Navigation.PushAsync(new SuccessPage());
             }
 
@@ -375,49 +377,7 @@ namespace reflectDaily.Main.journal
 
         }
 
-        private async Task SaveResponsesToDatabase()
-        {
-            using (var conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<PlayerResponse>();
-                foreach (var response in responseList)
-                {
-                    var existingResponse = conn.Table<PlayerResponse>().FirstOrDefault(r => r.QuestionId == response.QuestionId && r.UserId == response.UserId && r.ResponseDate == response.ResponseDate);
-                    if (existingResponse != null)
-                    {
-                        existingResponse.SelectedOption = response.SelectedOption;
-                        conn.Update(existingResponse);
-                    }
-                    else
-                    {
-                        conn.Insert(response);
-
-                    }
-                }
-            }
-        }
-
-        /*private void SetPreviousResponse(PlayerResponse playerResponse)
-        {
-
-            if (playerResponse != null)
-            {
-
-                Button currentOptionSelected = new Button();
-                PreviousOptionSelected.BackgroundColor = (Color)Application.Current.Resources["secondary"];
-
-
-                currentOptionSelected.Text = playerResponse.SelectedOption;
-
-*/
-        /*                currentOptionSelected.Clicked += this.OptionButton_Clicked;
-*//*
-                PreviousOptionSelected = currentOptionSelected;
-                replacedBtn = currentOptionSelected as Button;
-            }
-
-
-        }*/
+       
 
     }
 }

@@ -37,8 +37,17 @@ namespace reflectDaily.Main.journal
 
             var userId = App.loggedUserObj.Id;
 
-            DatabaseManager dbManager = new DatabaseManager(App.DatabaseLocation);
-            List<PlayerResponse> responses = dbManager.GetResponsesByDate(selectedDate, userId);
+            List<PlayerResponse> responses = App.databaseManager.GetResponsesByDate(selectedDate, userId);
+            if(responses != null)
+            {
+                App.databaseManager.AddQuestionDetailToPlayerResponses(responses);
+            }
+            else
+            {
+                DisplayAlert("No Response Found", "There is no response on selected date", "ok");
+
+            }
+
 
             if (responses == null)
             {
