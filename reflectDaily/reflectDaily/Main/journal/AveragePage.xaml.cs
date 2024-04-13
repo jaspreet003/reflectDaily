@@ -106,6 +106,8 @@ namespace reflectDaily.Main.journal
             var responses = App.databaseManager.GetResponsesByDate(startDate, endDate, userId);
             foreach (var response in responses)
             {
+
+                Console.WriteLine($"Each Response inside process responses : {response.ToString()}");
                 UpdateResponseDictionary(response);
             }
 
