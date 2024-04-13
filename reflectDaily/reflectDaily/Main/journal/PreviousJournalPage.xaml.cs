@@ -36,8 +36,8 @@ namespace reflectDaily.Main.journal
         {
 
             var userId = App.loggedUserObj.Id;
-
-            List<PlayerResponse> responses = App.databaseManager.GetResponsesByDate(selectedDate, userId);
+            var enddate = selectedDate.AddDays(1);
+            List<PlayerResponse> responses = App.databaseManager.GetResponsesByDate(selectedDate,enddate, userId);
             if(responses != null)
             {
                 responses = App.databaseManager.AddQuestionDetailToPlayerResponses(responses);

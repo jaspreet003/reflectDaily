@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using reflectDaily.Main.journal;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,15 +18,17 @@ namespace reflectDaily.Model
             db.CreateTable<JournalQuestion>();
         }
 
-        public List<PlayerResponse> GetResponsesByDate(DateTime date, int userId)
+        public List<PlayerResponse> GetResponsesByDate(DateTime strDate, DateTime endDate, int userId)
         {
-            var startDate = date.Date; // Midnight at the start of the day
-            var endDate = startDate.AddDays(1); // Midnight at the start of the next day
+            var startDate = strDate.Date; // Midnight at the start of the day
+            //enddate Midnight at the start of the next day
 
             return db.Table<PlayerResponse>()
                      .Where(r => r.ResponseDate >= startDate && r.ResponseDate < endDate && r.UserId == userId)
                      .ToList();
         }
+
+       
 
         public List<PlayerResponse> AddQuestionDetailToPlayerResponses(List<PlayerResponse> responses)
 
