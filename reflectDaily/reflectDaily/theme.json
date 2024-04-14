@@ -79,7 +79,7 @@
         "base": "#FAFAFA",
         "info": "#31707E",
         "success": "#4CAF50",
-        "warning": "#FFC107",
+        "warning": "#bdc929",
         "error": "#F44336"
       }
     },

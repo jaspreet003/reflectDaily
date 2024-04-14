@@ -65,7 +65,7 @@ namespace reflectDaily.Main.journal
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            Navigation.PopAsync();
+            Navigation.PushAsync(new JournalPage());
         }
 
         private void LastWeekAvgButton_Clicked(object sender, EventArgs e)

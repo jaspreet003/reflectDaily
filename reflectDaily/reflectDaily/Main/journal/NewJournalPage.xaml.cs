@@ -122,25 +122,23 @@ namespace reflectDaily.Main.journal
             if (nextPosition < ((carouselQuestion.ItemsSource as IEnumerable<object>).Count() - 1) )
             {
 
+                nextButton.Text = "NEXT";
+
                 nextButton.IsEnabled = false;
-
-
-                //minus 1 because nextPosition is already ++
-                var currentQuestion = App.questions[carouselQuestion.Position];
-                UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
-
 
                 carouselQuestion.Position = nextPosition;
 
                 questionPosition++;
 
-
             }
-            else if(nextPosition < (carouselQuestion.ItemsSource as IEnumerable<object>).Count())
+            else if(nextPosition == (carouselQuestion.ItemsSource as IEnumerable<object>).Count()-1)
             {
-                carouselQuestion.Position = nextPosition;
                 var nextButton = sender as Button;
                 nextButton.Text = "SUBMIT";
+
+
+                carouselQuestion.Position = nextPosition;
+
                 questionPosition++;
             }
             else
@@ -149,13 +147,15 @@ namespace reflectDaily.Main.journal
                  await Navigation.PushAsync(new SuccessPage());
             }
 
-            if(questionPosition > 0)
+            var currentQuestion = App.questions[carouselQuestion.Position];
+            UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
+
+
+            if (questionPosition > 0)
             {
                 previousButton.IsEnabled = true;
             }
-
-
-          
+         
         }
 
         private void PreviousButton_Clicked(object sender, EventArgs e)
@@ -177,8 +177,9 @@ namespace reflectDaily.Main.journal
             else {
                 carouselQuestion.Position = prevPosition;
                 previousButton.IsEnabled = true;
-
             }
+
+            nextButton.Text = "NEXT";
 
             nextButton.IsEnabled = true;
 
@@ -360,7 +361,10 @@ namespace reflectDaily.Main.journal
 
         }
 
-       
+        private void GotoHomeButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new JournalPage());
 
+        }
     }
 }

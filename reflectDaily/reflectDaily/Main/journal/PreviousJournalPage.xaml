@@ -2,9 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"     
             xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
-             x:Class="reflectDaily.Main.journal.PreviousJournalPage">
+             x:Class="reflectDaily.Main.journal.PreviousJournalPage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout Margin="20,30" Spacing="30">
+            <Frame BackgroundColor="Transparent" Margin="0" Padding="0">
+                <Button Text="&lt; Select Another Date" BackgroundColor="Transparent" TextColor="{DynamicResource primary}" FontAttributes="Italic" Padding="0" Margin="0" HorizontalOptions="Start" Clicked="GotoHomeButton_Clicked"></Button>
+            </Frame>
+
             <Label Text="Select Date"                   
                 HorizontalOptions="CenterAndExpand" 
                    TextColor="{DynamicResource neutral}"

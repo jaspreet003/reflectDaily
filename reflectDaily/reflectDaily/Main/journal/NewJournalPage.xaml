@@ -1,8 +1,14 @@
 ﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="reflectDaily.Main.journal.NewJournalPage">
+             x:Class="reflectDaily.Main.journal.NewJournalPage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
+
+            <Frame HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource primary}" HeightRequest="40">
+                <Button BackgroundColor="Transparent" HorizontalOptions="Start" Text="&lt; Back to Home Page" TextColor="{DynamicResource base}" FontAttributes="Italic" Clicked="GotoHomeButton_Clicked"></Button>
+            </Frame>
+            
             <Frame Margin="30" BackgroundColor="{DynamicResource primary}" VerticalOptions="FillAndExpand" Padding="30" CornerRadius="20" HasShadow="True">
                 <StackLayout VerticalOptions="FillAndExpand">
                     <CarouselView x:Name="carouselQuestion" CurrentItemChanged="carouselQuestion_CurrentItemChanged">

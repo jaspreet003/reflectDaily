@@ -21,8 +21,6 @@ namespace reflectDaily.Main.journal
 			InitializeComponent ();
             dateSelected = selectedDate;
             responseList = response;
-
-            DisplayAlert("haha", response[2].ToString (),"ok");
         }
 
         protected override void OnAppearing()

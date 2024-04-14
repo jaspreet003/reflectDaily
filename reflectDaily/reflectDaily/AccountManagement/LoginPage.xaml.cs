@@ -62,7 +62,6 @@ namespace reflectDaily.AccountManagement
                 await Application.Current.SavePropertiesAsync();
 
                 await Application.Current.SavePropertiesAsync();
-                await DisplayAlert("Login Success", "You have successfully logged in.", "OK");
                 await Navigation.PushAsync(new HomePage());
 
             }

@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using reflectDaily.AccountManagement;
 using reflectDaily.Main.journal;
 using reflectDaily.Model;
 using Xamarin.Forms;
@@ -135,6 +136,15 @@ namespace reflectDaily.Main
                 await DisplayAlert("Error", "Failed to update user information.", "OK");
             }
 
+        }
+
+        private async void ImageButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LoginPage());
+
+            // Clear the navigation stack so user cannot navigate back to the previous page
+            NavigationPage.SetHasBackButton(this, false);
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }

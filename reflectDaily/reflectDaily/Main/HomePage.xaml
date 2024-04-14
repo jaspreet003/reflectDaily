@@ -12,7 +12,7 @@
             NavigationPage.HasNavigationBar="False">
 
 
-    <local:JournalPage Title="Journal" />
+    <local:JournalPage Title="Journal"/>
     <local:SettingPage Title="Setting" />
 
 
