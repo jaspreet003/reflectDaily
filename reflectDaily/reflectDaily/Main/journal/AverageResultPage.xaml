@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <Frame BackgroundColor="Transparent" Margin="0" Padding="0">
+            <Frame BackgroundColor="Transparent" Margin="15, 0" Padding="0">
                 <Button Text="&lt; Select Another Date" BackgroundColor="Transparent" FontAttributes="Italic" Padding="0" Margin="0" HorizontalOptions="Start" Clicked="AnotherDateButton_Clicked"></Button>
             </Frame>
 
@@ -14,7 +14,7 @@
                 <StackLayout Spacing="30" Padding="10, 20">
                     <Label Text="SUMMARY" TextColor="{DynamicResource base}" FontSize="20" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
 
-                    <ListView x:Name="playerResponseList" HasUnevenRows="True" Margin="10">
+                    <ListView x:Name="playerResponseList" HasUnevenRows="True" Margin="10, 5">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>

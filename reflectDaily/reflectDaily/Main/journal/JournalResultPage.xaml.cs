@@ -32,7 +32,7 @@ namespace reflectDaily.Main.journal
 
         private void AnotherDateButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PopAsync ();
+            Navigation.PopAsync();
         }
 
         private void GotoHomeButton_Clicked(object sender, EventArgs e)

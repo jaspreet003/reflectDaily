@@ -26,10 +26,6 @@ namespace reflectDaily.Main
                 var user = JsonConvert.DeserializeObject<User>(jsonString);
                 this.username.Text = user.Username;
             }
-            todaysJournalButton.BackgroundColor = (Color)Application.Current.Resources["primary"];
-            PreviousJournalButton.BackgroundColor = (Color)Application.Current.Resources["primary"];
-            AverageJournalButton.BackgroundColor = (Color)Application.Current.Resources["primary"];
-
 
             // set the date
             DateTime thisDate = DateTime.Today;

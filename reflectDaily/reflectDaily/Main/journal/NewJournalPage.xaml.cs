@@ -363,7 +363,7 @@ namespace reflectDaily.Main.journal
 
         private void GotoHomeButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new JournalPage());
+            Navigation.PushAsync(new HomePage());
 
         }
     }
