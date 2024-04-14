@@ -40,6 +40,7 @@ namespace reflectDaily.Main.journal
             };
 
             titleView.Margin = new Thickness(30, 0, 30, 0);
+            titleView.Padding = new Thickness(0, 0, 0, 0); 
             NavigationPage.SetTitleView(this, titleView);
 
             carouselQuestion.ItemsSource = App.questions;
@@ -126,6 +127,9 @@ namespace reflectDaily.Main.journal
 
                 nextButton.IsEnabled = false;
 
+                var currentQuestion = App.questions[carouselQuestion.Position];
+                UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
+
                 carouselQuestion.Position = nextPosition;
 
                 questionPosition++;
@@ -135,7 +139,8 @@ namespace reflectDaily.Main.journal
             {
                 var nextButton = sender as Button;
                 nextButton.Text = "SUBMIT";
-
+                var currentQuestion = App.questions[carouselQuestion.Position];
+                UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
 
                 carouselQuestion.Position = nextPosition;
 
@@ -145,11 +150,10 @@ namespace reflectDaily.Main.journal
             {
                 await App.databaseManager.SaveResponsesToDatabase(responseList);
                  await Navigation.PushAsync(new SuccessPage());
+
+                var currentQuestion = App.questions[carouselQuestion.Position];
+                UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
             }
-
-            var currentQuestion = App.questions[carouselQuestion.Position];
-            UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
-
 
             if (questionPosition > 0)
             {
