@@ -20,7 +20,6 @@
                             <Label Text="Welcome" FontSize="Medium" FontAttributes="Bold" TextColor="{DynamicResource neutral}"/>
                             <Label x:Name="username" Text="JASPREET" FontSize="Medium" TextColor="{DynamicResource neutral}" FontAttributes="Bold" Margin="0,0,0,5"/>
                         </StackLayout>
-                        <ImageButton HorizontalOptions="End" BackgroundColor="Transparent" Source="exit.png" Clicked="ImageButton_Clicked" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"></ImageButton>
                     </StackLayout>
                 </Frame>
 
