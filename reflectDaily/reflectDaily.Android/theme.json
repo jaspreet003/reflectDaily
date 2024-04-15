@@ -1,0 +1,129 @@
+[
+    {
+      "name": "Red",
+      "colors": {
+        "primary": "#FF0000",
+        "secondary": "#FFCCCC",
+        "accent": "#FF6666",
+        "neutral": "#333333",
+        "base": "#FFFFFF",
+        "info": "#3A6EA5",
+        "success": "#4CAF50",
+        "warning": "#FFA500",
+        "error": "#D32F2F"
+      }
+    },
+    {
+      "name": "Orange",
+      "colors": {
+        "primary": "#FFA500",
+        "secondary": "#FFE5CC",
+        "accent": "#FFB347",
+        "neutral": "#333333",
+        "base": "#FFFFFF",
+        "info": "#3A6EA5",
+        "success": "#4CAF50",
+        "warning": "#FFC107",
+        "error": "#D32F2F"
+      }
+    },
+    {
+      "name": "Yellow",
+      "colors": {
+        "primary": "#FFFF00",
+        "secondary": "#FFFFE0",
+        "accent": "#FFFF66",
+        "neutral": "#333333",
+        "base": "#FFFFFF",
+        "info": "#3A6EA5",
+        "success": "#4CAF50",
+        "warning": "#FFEB3B",
+        "error": "#D32F2F"
+      }
+    },
+    {
+      "name": "Green",
+      "colors": {
+        "primary": "#008000",
+        "secondary": "#CCEBD6",
+        "accent": "#00FF00",
+        "neutral": "#333333",
+        "base": "#FFFFFF",
+        "info": "#3A6EA5",
+        "success": "#4CAF50",
+        "warning": "#FFEB3B",
+        "error": "#D32F2F"
+      }
+    },
+    {
+      "name": "Cyan",
+      "colors": {
+        "primary": "#00FFFF",
+        "secondary": "#CCFFFF",
+        "accent": "#66FFFF",
+        "neutral": "#333333",
+        "base": "#FFFFFF",
+        "info": "#3A6EA5",
+        "success": "#4CAF50",
+        "warning": "#FFEB3B",
+        "error": "#D32F2F"
+      }
+    },
+    {
+      "name": "Blue",
+      "colors": {
+        "primary": "#008080",
+        "secondary": "#B2DFDB",
+        "accent": "#FFA726",
+        "neutral": "black",
+        "base": "#FAFAFA",
+        "info": "#31707E",
+        "success": "#4CAF50",
+        "warning": "#bdc929",
+        "error": "#F44336"
+      }
+    },
+    {
+      "name": "Purple",
+      "colors": {
+        "primary": "#800080",
+        "secondary": "#E6CCE6",
+        "accent": "#D580FF",
+        "neutral": "#333333",
+        "base": "#FFFFFF",
+        "info": "#3A6EA5",
+        "success": "#4CAF50",
+        "warning": "#FFC107",
+        "error": "#D32F2F"
+      }
+    },
+    {
+      "name": "Pink",
+      "colors": {
+        "primary": "#FFC0CB",
+        "secondary": "#FFE6E6",
+        "accent": "#FFB6C1",
+        "neutral": "#333333",
+        "base": "#FFFFFF",
+        "info": "#3A6EA5",
+        "success": "#4CAF50",
+        "warning": "#FFC107",
+        "error": "#D32F2F"
+      }
+    },
+  {
+    "name": "LightBlue",
+    "colors": {
+      "primary": "#5FAEAA",
+      "secondary": "#D5F2EF",
+      "accent": "#8FD9C6",
+      "neutral": "#333333",
+      "base": "#FFFFFF",
+      "info": "#3A6EA5",
+      "success": "#4CAF50",
+      "warning": "#FFC107",
+      "error": "#D32F2F"
+    }
+  }
+]
+
