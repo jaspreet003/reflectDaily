@@ -18,7 +18,10 @@
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout Grid.Row="0" Spacing="20" VerticalOptions="FillAndExpand" Padding="20">
-                                    <Label Text="{Binding questionNumber}" FontSize="20" HorizontalOptions="CenterAndExpand" TextColor="White" FontAttributes="Bold"/>
+                                    <StackLayout Orientation="Horizontal">
+                                    <Label Text="Question : " FontSize="20" HorizontalOptions="Start" TextColor="White" FontAttributes="Bold"/>
+                                    <Label Text="{Binding questionNumber}" FontSize="20" HorizontalOptions="Start" TextColor="White" FontAttributes="Bold"/>
+                                    </StackLayout>
                                     <Label Text="{Binding questionDetail}"  FontSize="30" HorizontalOptions="CenterAndExpand" TextColor="White" FontAttributes="Bold"/>
 
                                     <ScrollView Grid.Column="0" VerticalOptions="FillAndExpand" Orientation="Vertical" HeightRequest="200" HorizontalOptions="FillAndExpand"
