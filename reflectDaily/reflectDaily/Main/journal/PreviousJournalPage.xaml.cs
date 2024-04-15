@@ -36,20 +36,15 @@ namespace reflectDaily.Main.journal
         {
 
             var userId = App.loggedUserObj.Id;
-            var enddate = selectedDate.AddDays(1);
-            List<PlayerResponse> responses = App.databaseManager.GetResponsesByDate(selectedDate,enddate, userId);
-            if(responses != null)
+            List<PlayerResponse> responses = App.databaseManager.GetResponsesByDate(selectedDate,selectedDate, userId);
+
+            if(responses.Count > 0 )
             {
                 responses = App.databaseManager.AddQuestionDetailToPlayerResponses(responses);
             }
-            else
-            {
-                DisplayAlert("No Response Found", "There is no response on selected date", "ok");
-
-            }
 
 
-            if (responses == null)
+            if (responses.Count == 0)
             {
                 DisplayAlert("RESULT NOT FOUND", "The selected Date does not have any data. Please choose another date.", "OK");
             }

@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <Frame HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource primary}" HeightRequest="30" Padding="15">
+            <Frame HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource primary}" Padding="0" Margin="0">
                 <Button BackgroundColor="Transparent" HorizontalOptions="Start" Text="&lt; Back to Home Page" TextColor="{DynamicResource base}" FontAttributes="Italic" Clicked="GotoHomeButton_Clicked" ></Button>
             </Frame>
             
