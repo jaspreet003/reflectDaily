@@ -20,7 +20,7 @@
 
                     <Color x:Key="success">#4CAF50</Color>
 
-                    <Color x:Key="warning">#FFC107</Color>
+                    <Color x:Key="warning">#bdc929</Color>
 
                     <Color x:Key="error">#F44336</Color>
                     

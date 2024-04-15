@@ -11,24 +11,27 @@
             <Image Source="journalBack.jpg"
                    Aspect="AspectFill"/>
 
-            <Frame BackgroundColor="{DynamicResource secondary}" Opacity="0.3"></Frame>
+            <Frame BackgroundColor="{DynamicResource secondary}" Opacity="0.45"></Frame>
             
             <StackLayout>
-                <Frame Padding="10" BackgroundColor="Transparent">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                        <Label Text="WELCOME" FontSize="Medium" TextColor="{DynamicResource neutral}"/>
-                        <Label x:Name="username" Text="JASPREET" FontSize="Medium" TextColor="{DynamicResource neutral}" FontAttributes="Bold" Margin="0,0,0,5"/>
+                <Frame Padding="10" BackgroundColor="{DynamicResource warning}" Opacity="0.8">
+                    <StackLayout Padding="20,5" Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" >
+                            <Label Text="Welcome" FontSize="Medium" FontAttributes="Bold" TextColor="{DynamicResource neutral}"/>
+                            <Label x:Name="username" Text="JASPREET" FontSize="Medium" TextColor="{DynamicResource neutral}" FontAttributes="Bold" Margin="0,0,0,5"/>
+                        </StackLayout>
+                        <ImageButton HorizontalOptions="End" BackgroundColor="Transparent" Source="exit.png" Clicked="ImageButton_Clicked" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"></ImageButton>
                     </StackLayout>
                 </Frame>
 
 
-                <Label x:Name="dateToday" HorizontalOptions="CenterAndExpand" FontSize="25" FontAttributes="Bold" Margin="20" TextColor="White" TextDecorations="None"/>
-                <StackLayout Margin="30" VerticalOptions="FillAndExpand" Spacing="60">
-                    <Button Text="Start Today's Journal" Padding="30" BackgroundColor="{DynamicResource primary}" CornerRadius="15" Clicked="TodaysJournalButton_Clicked"
+                <Label x:Name="dateToday" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="25" FontAttributes="Bold" Margin="10,20" TextColor="{DynamicResource base}" TextDecorations="None"/>
+                <StackLayout Margin="30,10,30,50" VerticalOptions="FillAndExpand" Spacing="80">
+                    <Button x:Name="todaysJournalButton" Text="Start Today's Journal" Padding="30" BackgroundColor="{DynamicResource primary}" CornerRadius="15" Clicked="TodaysJournalButton_Clicked"
                     FontSize="15" TextColor="{DynamicResource base}" FontAttributes="Bold" BorderColor="{DynamicResource secondary}" BorderWidth="2"></Button>
-                    <Button Text="Recent Journals" Padding="30" BackgroundColor="{DynamicResource primary}" CornerRadius="25" Clicked="PreviousJournalButton_Clicked"
+                    <Button x:Name="PreviousJournalButton" Text="Recent Journals" Padding="30" BackgroundColor="{DynamicResource primary}" CornerRadius="25" Clicked="PreviousJournalButton_Clicked"
                     FontSize="15" TextColor="{DynamicResource base}"  FontAttributes="Bold" BorderColor="{DynamicResource secondary}" BorderWidth="2"></Button>
-                    <Button Text="Check Average" Padding="30" BackgroundColor="{DynamicResource primary}" CornerRadius="25" Clicked="CheckAverageButton_Clicked"
+                    <Button x:Name="AverageJournalButton" Text="Check Average" Padding="30" BackgroundColor="{DynamicResource primary}" CornerRadius="25" Clicked="CheckAverageButton_Clicked"
                     FontSize="15"  TextColor="{DynamicResource base}"  FontAttributes="Bold" BorderColor="{DynamicResource secondary}" BorderWidth="2"></Button>
                 </StackLayout>
             </StackLayout>

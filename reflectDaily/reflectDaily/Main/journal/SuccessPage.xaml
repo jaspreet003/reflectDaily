@@ -7,11 +7,11 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="#fefcfe">
 
-            <Frame HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource primary}" HeightRequest="40">
+            <Frame HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource primary}" Padding="0" Margin="0">
                 <Button BackgroundColor="Transparent" HorizontalOptions="Start" Text="&lt; Back to Home Page" TextColor="{DynamicResource base}" FontAttributes="Italic" Clicked="GotoHomeButton_Clicked"></Button>
             </Frame>
             
-            <Frame VerticalOptions="FillAndExpand" BackgroundColor="Transparent" Margin="30">
+            <Frame VerticalOptions="FillAndExpand" BackgroundColor="Transparent" Margin="30,0">
                 
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                     <Label Text="JOURNAL SAVE" TextColor="{DynamicResource primary}" FontSize="25"
@@ -24,7 +24,7 @@
                 </StackLayout>
                 
             </Frame>
-            <Image Source="success.png" IsAnimationPlaying="True" Aspect="Fill"></Image>
+            <Image Source="success.png" IsAnimationPlaying="True" Aspect="Fill" Margin="30"></Image>
         </StackLayout>
     </ContentPage.Content>
     

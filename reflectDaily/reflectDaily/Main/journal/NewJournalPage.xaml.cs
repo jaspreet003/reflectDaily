@@ -23,7 +23,6 @@ namespace reflectDaily.Main.journal
         private Button replacedBtn;
 
         private int questionPosition;
-        List<JournalQuestion> questions;
 
         List<PlayerResponse> responseList = new List<PlayerResponse>();
         public NewJournalPage ()
@@ -41,11 +40,12 @@ namespace reflectDaily.Main.journal
             };
 
             titleView.Margin = new Thickness(30, 0, 30, 0);
+            titleView.Padding = new Thickness(0, 0, 0, 0); 
             NavigationPage.SetTitleView(this, titleView);
 
-            LoadQuestionsFromJson();
+            carouselQuestion.ItemsSource = App.questions;
 
-            
+
 
 
         }
@@ -110,69 +110,56 @@ namespace reflectDaily.Main.journal
 
         }
 
-        private void LoadQuestionsFromJson()
-        {
-            var assembly = typeof(NewJournalPage).GetTypeInfo().Assembly;
-            Stream stream = assembly.GetManifestResourceStream("reflectDaily.questions.json");
-
-            using (var reader = new StreamReader(stream))
-            {
-                var json = reader.ReadToEnd();
-                questions = JsonConvert.DeserializeObject<List<JournalQuestion>>(json);
-
-                carouselQuestion.ItemsSource = questions;
-            }
-
-        }
 
         private void carouselQuestion_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
         {
 
         }
 
-        private async void NextButton_Clicked(object sender, EventArgs e)
+        private  async void NextButton_Clicked(object sender, EventArgs e)
         {
             int nextPosition = carouselQuestion.Position + 1;
 
             if (nextPosition < ((carouselQuestion.ItemsSource as IEnumerable<object>).Count() - 1) )
             {
 
+                nextButton.Text = "NEXT";
+
                 nextButton.IsEnabled = false;
 
-
-                //minus 1 because nextPosition is already ++
-                var currentQuestion = questions[carouselQuestion.Position];
-
-/*                await DisplayAlert("Question", currentQuestion.ToString(), "ok");
-*/              UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
-
+                var currentQuestion = App.questions[carouselQuestion.Position];
+                UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
 
                 carouselQuestion.Position = nextPosition;
 
                 questionPosition++;
 
-
             }
-            else if(nextPosition < (carouselQuestion.ItemsSource as IEnumerable<object>).Count())
+            else if(nextPosition == (carouselQuestion.ItemsSource as IEnumerable<object>).Count()-1)
             {
-                carouselQuestion.Position = nextPosition;
                 var nextButton = sender as Button;
                 nextButton.Text = "SUBMIT";
+                var currentQuestion = App.questions[carouselQuestion.Position];
+                UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
+
+                carouselQuestion.Position = nextPosition;
+
                 questionPosition++;
             }
             else
             {
-                await SaveResponsesToDatabase();
-                await Navigation.PushAsync(new SuccessPage());
+                await App.databaseManager.SaveResponsesToDatabase(responseList);
+                 await Navigation.PushAsync(new SuccessPage());
+
+                var currentQuestion = App.questions[carouselQuestion.Position];
+                UpdateOrCreateResponse(currentQuestion, PreviousOptionSelected.Text);
             }
 
-            if(questionPosition > 0)
+            if (questionPosition > 0)
             {
                 previousButton.IsEnabled = true;
             }
-
-
-          
+         
         }
 
         private void PreviousButton_Clicked(object sender, EventArgs e)
@@ -194,8 +181,9 @@ namespace reflectDaily.Main.journal
             else {
                 carouselQuestion.Position = prevPosition;
                 previousButton.IsEnabled = true;
-
             }
+
+            nextButton.Text = "NEXT";
 
             nextButton.IsEnabled = true;
 
@@ -343,7 +331,6 @@ namespace reflectDaily.Main.journal
                 {
                     response.SelectedOption = selectedOption;
                     response.ResponseDate = DateTime.Now.Date;
-                    DisplayAlert("update", response.ToString(), "OK");
 
                 }
                 else
@@ -357,7 +344,6 @@ namespace reflectDaily.Main.journal
                     };
 
                     responseList.Add(newResponse);
-                    DisplayAlert("Save", newResponse.ToString(), "OK");
 
                 }
             }
@@ -372,7 +358,6 @@ namespace reflectDaily.Main.journal
                 };
 
                 responseList.Add(newResponse);
-                DisplayAlert("Save First Time", newResponse.ToString(), "OK");
 
             }
 
@@ -380,51 +365,10 @@ namespace reflectDaily.Main.journal
 
         }
 
-        private async Task SaveResponsesToDatabase()
+        private void GotoHomeButton_Clicked(object sender, EventArgs e)
         {
-            using (var conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<PlayerResponse>();
-                foreach (var response in responseList)
-                {
-                    var existingResponse = conn.Table<PlayerResponse>().FirstOrDefault(r => r.QuestionId == response.QuestionId && r.UserId == response.UserId && r.ResponseDate == response.ResponseDate);
-                    if (existingResponse != null)
-                    {
-                        existingResponse.SelectedOption = response.SelectedOption;
-                        conn.Update(existingResponse);
-                        DisplayAlert("Update", "ho gya", "ok");
-                    }
-                    else
-                    {
-                        conn.Insert(response);
-                        DisplayAlert("inserted", "ho gya", "ok");
+            Navigation.PushAsync(new HomePage());
 
-                    }
-                }
-            }
         }
-
-        /*private void SetPreviousResponse(PlayerResponse playerResponse)
-        {
-
-            if (playerResponse != null)
-            {
-
-                Button currentOptionSelected = new Button();
-                PreviousOptionSelected.BackgroundColor = (Color)Application.Current.Resources["secondary"];
-
-
-                currentOptionSelected.Text = playerResponse.SelectedOption;
-
-*/
-        /*                currentOptionSelected.Clicked += this.OptionButton_Clicked;
-*//*
-                PreviousOptionSelected = currentOptionSelected;
-                replacedBtn = currentOptionSelected as Button;
-            }
-
-
-        }*/
-
     }
 }

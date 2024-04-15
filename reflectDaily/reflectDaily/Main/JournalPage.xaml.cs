@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using reflectDaily.AccountManagement;
 using reflectDaily.Main.journal;
 using reflectDaily.Model;
 using System;
@@ -57,6 +58,16 @@ namespace reflectDaily.Main
             averageButton.BackgroundColor = (Color)Application.Current.Resources["secondary"];
 
             Navigation.PushAsync(new AveragePage());
+        }
+
+        private async void ImageButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LoginPage());
+
+            // Clear the navigation stack so user cannot navigate back to the previous page
+            NavigationPage.SetHasBackButton(this, false);
+            NavigationPage.SetHasNavigationBar(this, false);
+
         }
     }
 }

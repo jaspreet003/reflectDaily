@@ -1,4 +1,5 @@
-﻿using System;
+﻿using reflectDaily.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,28 @@ namespace reflectDaily.Main.journal
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AverageResultPage : ContentPage
 	{
-		public AverageResultPage ()
+        List<PlayerResponse> responseList = new List<PlayerResponse>();
+
+
+        public AverageResultPage (List<PlayerResponse> playerResponseList)
 		{
 			InitializeComponent ();
-		}
+            this.responseList = playerResponseList;
+
+            /*foreach (PlayerResponse playerResponse in playerResponseList)
+            {
+                Console.WriteLine(playerResponse.ToString());
+
+
+            }*/
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            playerResponseList.ItemsSource = responseList;  
+
+        }
 
         private void BackToHomeButton_Clicked(object sender, EventArgs e)
         {

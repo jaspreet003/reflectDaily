@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using reflectDaily.AccountManagement;
 using reflectDaily.Main.journal;
 using reflectDaily.Model;
 using Xamarin.Forms;
@@ -102,19 +103,19 @@ namespace reflectDaily.Main
 
             if (selectedThemeName == "Random")
             {
-                // If "Random" is selected, fetch the random theme from the themes list
-                selectedTheme = themes.FirstOrDefault(t => t.Name == "Random");
+                UpdateRandomColorsInResourceDictionary();
             }
             else
             {
                 // Otherwise, find the theme by the selected name
                 selectedTheme = themes.FirstOrDefault(t => t.Name == selectedThemeName);
+                if (selectedTheme != null)
+                {
+                    ThemeColour.ApplyTheme(selectedTheme);
+                }
             }
 
-            if (selectedTheme != null)
-            {
-                ThemeColour.ApplyTheme(selectedTheme);
-            }
+            
 
             //********** update user info *********************
             currentUser.Username = username.Text;
@@ -135,6 +136,32 @@ namespace reflectDaily.Main
                 await DisplayAlert("Error", "Failed to update user information.", "OK");
             }
 
+        }
+
+        private async void ImageButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LoginPage());
+
+            // Clear the navigation stack so user cannot navigate back to the previous page
+            NavigationPage.SetHasBackButton(this, false);
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        private void UpdateRandomColorsInResourceDictionary()
+        {
+            // Create an instance of Random outside the loop to avoid getting the same number.
+            Random rnd = new Random();
+
+            // Generate and set a random color for each resource key.
+            Application.Current.Resources["primary"] = Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            Application.Current.Resources["secondary"] = Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            Application.Current.Resources["accent"] = Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            Application.Current.Resources["neutral"] = Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            Application.Current.Resources["base"] = Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            Application.Current.Resources["info"] = Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            Application.Current.Resources["success"] = Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            Application.Current.Resources["warning"] = Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            Application.Current.Resources["error"] = Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
         }
     }
 }

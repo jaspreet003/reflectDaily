@@ -6,11 +6,14 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
             <Frame>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Hello" FontSize="20"></Label>
-                    <Label x:Name="usernameLabel" Text="Jaspreet" FontSize="20"></Label>
+                <StackLayout Margin="20,5" Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                        <Label Text="Hello" FontSize="20"></Label>
+                        <Label x:Name="usernameLabel" Text="Jaspreet" FontSize="20"></Label>
+                    </StackLayout>
+                <ImageButton WidthRequest="20" HeightRequest="20" BackgroundColor="Transparent" Source="exit.png" Clicked="ImageButton_Clicked" HorizontalOptions="End"></ImageButton>
                 </StackLayout>
-            </Frame>
+        </Frame>
 
 
             <StackLayout Margin="30"  VerticalOptions="FillAndExpand">

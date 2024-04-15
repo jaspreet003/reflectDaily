@@ -79,7 +79,7 @@
         "base": "#FAFAFA",
         "info": "#31707E",
         "success": "#4CAF50",
-        "warning": "#FFC107",
+        "warning": "#bdc929",
         "error": "#F44336"
       }
     },
@@ -111,33 +111,19 @@
         "error": "#D32F2F"
       }
     },
-    {
-      "name": "LightBlue",
-      "colors": {
-        "primary": "#5FAEAA",
-        "secondary": "#D5F2EF",
-        "accent": "#8FD9C6",
-        "neutral": "#333333",
-        "base": "#FFFFFF",
-        "info": "#3A6EA5",
-        "success": "#4CAF50",
-        "warning": "#FFC107",
-        "error": "#D32F2F"
-      }
-    },
-    {
-      "name": "Random",
-      "colors": {
-        "accent": "#00BCD4", // Cyan
-        "base": "#CDDC39", // Lime
-        "error": "#f44336", // Red
-        "info": "#FFEB3B", // Yellow
-        "neutral": "#607D8B", // Blue Grey
-        "primary": "#E91E63", // Pink
-        "secondary": "#9C27B0", // Deep Purple
-        "success": "#4CAF50", // Green
-        "warning": "#FF9800" // Orange
-      }
+  {
+    "name": "LightBlue",
+    "colors": {
+      "primary": "#5FAEAA",
+      "secondary": "#D5F2EF",
+      "accent": "#8FD9C6",
+      "neutral": "#333333",
+      "base": "#FFFFFF",
+      "info": "#3A6EA5",
+      "success": "#4CAF50",
+      "warning": "#FFC107",
+      "error": "#D32F2F"
     }
-  ]
+  }
+]
 
