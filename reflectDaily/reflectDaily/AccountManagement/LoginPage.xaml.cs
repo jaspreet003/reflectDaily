@@ -29,11 +29,6 @@ namespace reflectDaily.AccountManagement
             base.OnAppearing();
             var con = new SQLiteAsyncConnection(App.DatabaseLocation);
             await con.CreateTableAsync<User>();
-
-            emailEntry.Text = "test2@gmail.com";
-            passwordEntry.Text = "test123";
-            
-
         }
 
         private async void LoginButton_Clicked(object sender, EventArgs e) 
